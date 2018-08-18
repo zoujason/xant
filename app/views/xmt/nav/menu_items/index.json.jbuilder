@@ -1,0 +1,1 @@
+json.array! @mgr_menu_items, partial: 'mgr_menu_items/mgr_menu_item', as: :mgr_menu_item

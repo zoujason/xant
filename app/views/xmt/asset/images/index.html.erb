@@ -1,0 +1,141 @@
+<style>
+  .pictures{
+    max-height: 80px;
+    max-width: 150px;
+  }
+</style>
+<%= stylesheet_link_tag    'admin/lc_lightbox', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag    'admin/skins/minimal', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="page-header">
+  <h1>图片集管理<small></small></h1>
+</div>
+<p id="notice"><%= raw notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs tab-bricky xmt-tab">
+        <% @sites.each do |site| %>
+            <li class="<%= site.id == @site.id ? 'active' : '' %>">
+              <%= link_to site.name, xmt_asset_images_path(site_id: site.id) %>
+            </li>
+        <% end %>
+      </ul>
+
+      <div class="tab-content">
+        <div id="panel_tab_example1" class="tab-pane active">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn-group">
+              <%= link_to  '整体打包上传', upload_zip_file_xmt_asset_images_path(curp:url_encode(@current_path)), class: 'btn btn-default btn-success' %>
+            <!--筛选-->
+            </div>
+            <div id="sample_1_filter" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right dataTables_filter search-position">
+              <label>
+                <!--关键字筛选-->
+              </label>
+            </div>
+          </div>
+          <table class="table table-striped table-bordered table-hover table-full-width" id="sample-table-1">
+            <caption></caption>
+            <thead>
+            <tr>
+              <!--<th class="left">缩略图</th>-->
+              <th class="hidden-xs center">名称</th>
+              <th class="hidden-xs center">大小</th>
+              <th class="hidden-xs center">日期</th>
+              <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="hidden-xs left" colspan="4">
+                <% if @flag %>
+                <a href="<%= xmt_asset_images_path(curp:url_encode(File.dirname(@current_path))) %>"><i class="fa fa-envelope"></i>上级目录</a> |
+                <% end %>
+                当前文件夹:<%= @current_path  %></td>
+            </tr>
+            <% @images.each do |image|  %>
+                <tr>
+                  <!--<td class="center"><%#= image_tag(image["name"],class:"pictures") %></a></td>-->
+                  <td class="hidden-xs  center">
+                    <% if image.type == :file %>
+                        <%#= image.image_url  %>
+                        <!--<span>&</span>-->
+                        <a class="elem" href="<%= image_url(image.image_url) %>" data-lcl-thumb="<%= image_url(image.image_url) %>"><i class="fa fa-image"></i></a>
+                    <% else %>
+                        <a href="<%= xmt_asset_images_path(curp:url_encode(image.full_path)) %>"><i class="fa fa-envelope"></i></a>
+                    <% end %>
+                    <%= image.name %>
+
+                  </td>
+                  <td class="hidden-xs  center"><%= number_to_human_size(image.size) %></td>
+                  <td class="hidden-xs  center"><%= image.ctime %></td>
+                  <td class="center">
+                    <div class="visible-md visible-lg hidden-sm hidden-xs">
+                      <%#= link_to edit_xmt_press_article_path(article,channel_id:@channel.id,site_id: @site.id), 'class': 'btn btn-xs btn-teal tooltips', 'data-placement': 'top',  'data-original-title': '修改' do %>
+                          <!--<i class="fa fa-edit"></i>-->
+                      <%# end   %>
+                      <%= link_to  xmt_asset_image_path(image.id,filename:image.full_path,curp:@current_path,site_id: @site.id),  method: :delete,'class': 'btn btn-xs btn-bricky tooltips', 'data-placement': 'top', 'data-original-title': '删除', data: { confirm: confirm_str(image.type)} do %>
+                          <i class="fa fa-times"></i>
+                      <% end   %>
+                    </div>
+                    <div class="visible-xs visible-sm hidden-md hidden-lg">
+                      <div class="btn-group">
+                        <a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                          <i class="clip-cog"></i> <span class="caret"></span>
+                        </a>
+                        <ul role="menu" class="dropdown-menu pull-right">s
+                          <li role="presentation">
+                            <%#= link_to edit_xmt_press_article_path(article,channel_id:@channel.id,site_id: @site.id), 'tabindex': '-1', 'role': 'menuitem' do %>
+                                <!--<i class="fa fa-edit"></i> 修改-->
+                            <%#end %>
+                          </li>
+                          <li role="presentation">
+                            <%= link_to xmt_asset_image_path(image.id,filename:image.full_path,curp:@current_path,site_id: @site.id), 'tabindex': '-1', 'role': 'menuitem', method: :delete, data: { confirm: confirm_str(image.type)} do %>
+                                <i class="fa fa-times"></i> 删除
+                            <% end %>
+                          </li>
+                        </ul>
+                      </div>
+                    </div></td>
+                </tr>
+            <% end %>
+            </tbody>
+            <footer>
+              <tr><td colspan="7"><%= paginate @images, views_prefix: :xmt %></td></tr>
+            </footer>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <%= link_to  new_xmt_asset_image_path(site_id: @site.id,curp:@current_path) ,  "class":"btn btn-orange add-row" do %>
+          <i class="fa fa-plus"></i>
+      <% end  %>
+    </div>
+  </div>
+</div>
+
+</div>
+<%= javascript_include_tag  'admin/lc_lightbox.lite', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag  'admin/AlloyFinger/alloy_finger.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(e) {
+        // live handler
+        lc_lightbox('.elem', {
+             gallery : true,
+             thumb_attr: 'data-lcl-thumb',
+             skin: 'minimal',
+             radius: 0,
+             padding	: 0,
+             border_w: 0,
+            show_title		: false, // bool / whether to display titles
+            show_descr		: false, // bool / whether to display descriptions
+            show_author		: false
+        });
+
+    });
+</script>

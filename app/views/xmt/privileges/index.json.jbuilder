@@ -1,0 +1,1 @@
+json.array! @mgr_privileges, partial: 'mgr_privileges/mgr_privilege', as: :mgr_privilege

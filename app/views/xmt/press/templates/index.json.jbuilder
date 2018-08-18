@@ -1,0 +1,1 @@
+json.array! @mgr_templates, partial: 'mgr_templates/mgr_template', as: :mgr_template

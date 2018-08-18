@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h1>资源导入<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<ul id="myTab" class="nav nav-tabs tab-bricky xmt-tab">
+  <ul id="myTab" class="nav nav-tabs tab-bricky">
+    <% @sites.each do |site| %>
+        <li class="<%= site.id == @site.id ? 'active' : '' %>">
+          <%= link_to site.name, upload_zip_file_xmt_asset_images_path(site_id: site.id) %>
+        </li>
+    <% end %>
+  </ul>
+</ul>
+<div class="tab-content">
+  <div id="panel_tab_example1" class="tab-pane active">
+    <div class="form-group">
+      <div class="col-sm-9">
+        导入须知：<br/>
+        1.文件类型为ZIP的压缩包;<br/>
+        2.压缩包包含全部图片文件或者包含图片文件的文件夹;<br/>
+        3.导入成功后,会自动解压到对应的目录中;<br/>
+      </div>
+    </div>
+    <%= form_tag(zip_file_handle_xmt_asset_images_path(),method:"post" ,"class":"center", "multipart": true)  do %>
+        <%= hidden_field_tag :file_path,@current_path %>
+        <div class="col-sm-12">
+          <div class="tabbable">
+            <div class="tab-content">
+              <div class="tab-pane in active" id="panel_tab2_example1">
+                <div class="form-group">
+                  <div class="col-sm-9">
+                    <input type="hidden" name="site_id" value="<%= @site.id %>"/>
+                    <input type="file" name="file"  required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <!-- start: TEXT FIELDS PANEL -->
+          <div class="panel-body">
+            <div class="form-group">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-2" >
+                <div class="row">
+                  <input type="submit" name="commit" value="确认导入" class="btn btn-primary"  data-disable-with="确认导入">
+                  <a class="btn btn-teal" href="<%=  xmt_asset_images_url(site_id: @site.id,curp:@current_path)%>">
+                    <i class="fa fa-reply"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+<% end %>
+
+
+
+

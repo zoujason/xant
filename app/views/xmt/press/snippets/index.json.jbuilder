@@ -1,0 +1,1 @@
+json.array! @snippets, partial: 'mgr_snippets/mgr_snippet', as: :snippet

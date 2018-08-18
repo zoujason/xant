@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  host: MyString
+  name: MyString
+  path: MyString
+  logo: MyString
+  icon: MyString
+  alias: MyString
+  skin: MyString
+
+two:
+  host: MyString
+  name: MyString
+  path: MyString
+  logo: MyString
+  icon: MyString
+  alias: MyString
+  skin: MyString

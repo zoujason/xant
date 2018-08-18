@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>查看菜单项<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left">菜单项名称：</td>
+        <td class="column-right">
+          <%= @menu_item.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>所属菜单项：</td>
+        <td>
+          <%= @menu_item.parent.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>菜单项路径：</td>
+        <td>
+          <%= @menu_item.path %>
+        </td>
+      </tr>
+      <tr>
+        <td>菜单项图标：</td>
+        <td>
+          <%= @menu_item.icon %>
+          <i class="<%= @menu_item.icon %>"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <a class="btn btn-teal" href="<%= edit_xmt_nav_menu_item_path(@menu_item) %>">
+        <i class="fa fa-edit"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= xmt_nav_menu_items_path %>">
+        <i class="fa fa-reply"></i>
+      </a>
+    </div>
+  </div>
+
+</div>

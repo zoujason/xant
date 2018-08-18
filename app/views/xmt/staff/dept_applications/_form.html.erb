@@ -1,0 +1,59 @@
+<%= form_for(@dept) do |f| %>
+    <%= render 'shares/errors', obj: dept if dept.errors.any? %>
+    <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            部门名称：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:title, class: "form-control",placeholder:"部门名称",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:navigable, "公开显示：",class: "col-sm-2 control-label")%>
+          <div class="col-sm-9">
+            <div class="checkbox">
+              <label>
+                <%= f.check_box(:navigable, { class: 'grey'}, "true", "false")%>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            所属部门：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.select(:parent_id,Xmt::Staff::DeptApplication.all.collect { |c| [ c.ancestors_and_self_name_format, c.id ] },{include_blank: true}, class: "form-control") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:sign,"部门类型：",class: "col-sm-2 control-label")%>
+          <div class="col-sm-9">
+            <%= f.collection_select :sign, Xmt::Core::Dict.dicts(:dept_type), :sign, :title, {}, class: "form-control" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:published_at, "发布日期：",class: "col-sm-2 control-label")%>
+          <div class="col-sm-9">
+            <%= f.datetime_field("published_at") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:seq,"部门排序：",class: "col-sm-2 control-label")%>
+          <div class="col-sm-9">
+            <%= f.number_field(:seq) %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+          <div class="col-sm-1">  <a class="btn btn-primary" href="<%= xmt_staff_dept_applications_path %>">
+            <i class="fa fa-reply"></i> </a></div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

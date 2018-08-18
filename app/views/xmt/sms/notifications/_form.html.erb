@@ -1,0 +1,42 @@
+<div class="panel-body">
+<%= form_for(@announcement, html: {class: "form-horizontal" , onkeydown:"if(event.keyCode==13){return false;}" }) do |f| %>
+       <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="form-group">
+            <%= f.label(:site,"所属站点：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.collection_select :site_id, [@site], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            标题：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:title, class: "form-control",placeholder:"标题",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label(:cont, "内容：", class: "col-sm-2 control-label")%>
+          <div class="col-sm-9">
+            <%= f.kindeditor :cont, owner: announcement, class: 'form-control'%>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+      <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_sms_notifications_path%>">
+        <i class="fa fa-reply"></i>
+      </a></div>
+    </div>
+<% end %>
+</div>
+

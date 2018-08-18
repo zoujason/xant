@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>频道管理<small></small></h1>
+</div>
+<p id="notice" ><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs tab-bricky">
+        <% @sites.each do |site| %>
+            <li class="<%= site.id == @site.id ? 'active' : '' %>">
+              <%= link_to site.name, xmt_press_channels_path(site_id: site.id) %>
+            </li>
+        <% end %>
+
+      </ul>
+      <div class="tab-content">
+        <div id="panel_tab_example1" class="tab-pane active">
+
+
+          <%= @menu_table.to_s.html_safe %>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <%= link_to  new_xmt_press_channel_path(site_id: @site.id) ,  "class":"btn btn-orange add-row" do %>
+          <i class="fa fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+//  $(function(){
+//      var notice = $("#notice").text();
+//      if(notice != null && notice != ''){
+//          alert(notice);
+//      }
+//  });
+</script>

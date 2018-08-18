@@ -1,0 +1,74 @@
+<div class="page-header">
+  <h1>查看题目信息<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+
+      <tr>
+        <td class="column-left">所属分类：</td>
+        <td class="column-right">
+          <%= @question.category.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">题目内容：</td>
+        <td class="column-right">
+          <%= @question.content %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">题目分值：</td>
+        <td class="column-right">
+          <%= @question.score %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">题目类型：</td>
+        <td class="column-right">
+          <%= type_title(@question) %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="column-left">答案：</td>
+        <td class="column-right">
+          <ol id="Answers">
+            <% @question.answers.each do |answer| %>
+                <li><span><%= answer.title %></span>
+                  <span>
+                        <%	if(answer.righted)  %>
+                          <i class="fa fa-check"></i>
+                        <%	else  %>
+                          <i class="fa fa-times"></i>
+                        <%	end %>
+                        </span>
+                  <span><%= answer.score  %></span>
+                </li>
+            <% end %>
+          </ol>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+
+      <a class="btn btn-teal" href="<%= edit_xmt_test_question_path(@question)%>">
+        <i class="fa fa-edit"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= xmt_test_questions_path %>">
+        <i class="fa fa-reply"></i>
+      </a>
+    </div>
+  </div>
+
+</div>

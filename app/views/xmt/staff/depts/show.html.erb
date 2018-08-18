@@ -1,0 +1,86 @@
+<div class="page-header">
+  <h1>查看文章<small></small></h1>
+</div>
+<% render 'shares/flash_messages'%>
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left">文章标题：</td>
+        <td class="column-right">
+          <%= @article.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">副　标题：</td>
+        <td class="column-right">
+          <%= @article.subtitle %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">所属频道：</td>
+        <td class="column-right">
+          <%= @channel.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">发布时间：</td>
+        <td class="column-right">
+          <%= @article.published_at %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">作　　者：</td>
+        <td class="column-right">
+          <%= @article.author %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">相关新闻：</td>
+        <td class="column-right">
+          <% @article.relationships.each do |re| %>
+              <div ><input type='checkbox'  checked > <%= re.title%></div>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">评　　论：</td>
+        <td class="column-right">
+          <% @comments.each  do |comm| %>
+              <div > <%= comm.cont %></div>
+              <% comm.child_reply(nil) do |reply| %>
+                  <div><%= reply.cont %></div>
+              <% end %>
+          <% end %>
+          <%= paginate @comments, views_prefix: :xmt %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">文章内容：</td>
+        <td class="column-right">
+          <%= @article.cont %>
+        </td>
+      </tr>
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+    <a class="btn btn-teal" href="<%=  xmt_press_articles_path(site_id: @site.id)%>">
+      <i class="fa fa-reply"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= edit_xmt_press_article_path(@article,site_id: @site.id, channel_id: @channel.id)%>">
+        <i class="fa fa-edit"></i>
+
+      </a>
+    </div>
+  </div>
+
+</div>
+

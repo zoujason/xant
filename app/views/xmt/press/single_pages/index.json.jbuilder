@@ -1,0 +1,1 @@
+json.array! @mgr_static_pages, partial: 'mgr_static_pages/mgr_static_page', as: :mgr_static_page

@@ -1,0 +1,1 @@
+json.partial! "mgr_permissions/mgr_permission", mgr_permission: @mgr_permission

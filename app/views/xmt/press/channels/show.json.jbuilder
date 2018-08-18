@@ -1,0 +1,1 @@
+json.partial! "mgr_channels/mgr_channel", mgr_channel: @mgr_channel

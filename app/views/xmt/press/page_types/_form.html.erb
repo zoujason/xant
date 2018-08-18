@@ -1,0 +1,252 @@
+<div class="panel-body">
+  <%= form_for(@page_type, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @page_type if @page_type.errors.any? %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+              <li class="active">
+                <a href="#panel_tab2_example1" data-toggle="tab">
+                  <i class="clip-home-2"></i>基本信息
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane in active" id="panel_tab2_example1">
+                <div class="form-group">
+                  <%= f.hidden_field :id %>
+                  <%= f.label(:title,"表单域分类：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:title, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label(:desc, "表单域描述：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_area(:desc, class: "form-control")%>
+                  </div>
+                </div>
+                <div id="delete_ids">
+
+                </div>
+                <div class="col-sm-2">
+                  <a title="添加属性" class="btn btn-primary" href="javascript:;" onclick="append_field()">
+                    添加属性 </a>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample-table-2">
+                  <thead>
+                  <tr>
+                    <th>表单域名称(必填项)</th>
+                    <th>表单域标识(字母-必填项)</th>
+                    <th>录入类型(必填项)</th>
+                    <th>默认值</th>
+                    <th class="text-center">操作</th>
+                  </tr>
+                  </thead>
+                  <tbody class="main_cont">
+                  <% @page_type.page_attrs.each do |page_attr|%>
+                      <tr>
+                        <td><input type="text" class="form-control" name="xmt_press_page_type[page_attrs][][title]"  value="<%=page_attr.title%>"></td>
+                        <td><input type="text" class="form-control" name="xmt_press_page_type[page_attrs][][sign]"   value="<%=page_attr.sign%>"></td>
+                        <td>
+                          <%= select_tag "xmt_press_page_type[page_attrs][][attr_type]",options_from_collection_for_select(Xmt::Core::Dict.dicts(:field_type), "sign", "title",page_attr.attr_type),class:"form-control",onchange:'chang(this,this.value)'%>
+                        </td>
+                        <td><input type=text  class=form-control placeholder="例如：你好" name="xmt_press_page_type[page_attrs][][def_datas]" value="<%=page_attr.def_datas%>"/></td>
+                        <td class="center">
+                          <button class='del_form btn btn-xs btn-bricky tooltips' onclick="del_form_id(this,'<%= page_attr.id.to_s%>')">删除</button>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+
+
+                <style>
+                  .form_span{background-color: #f9f6f6; padding-top: 15px}
+                  .del_form{float: right;margin-right: 50px;margin-top: 8px}
+                </style>
+
+              </div>
+              <script>
+                var str_tr = "<tr>";
+                    str_tr += "<td><input type='text' class='form-control' name='xmt_press_page_type[page_attrs][][title]'  value='' required placeholder='表单域名称(必填项)'></td>";
+                    str_tr += "<td><input type='text' class='form-control' name='xmt_press_page_type[page_attrs][][sign]'   value='' required placeholder='表单域标识-字母(必填项)'></td>";
+                    str_tr += " <td><select class='form-control'  name='xmt_press_page_type[page_attrs][][attr_type]' onchange='chang(this,this.value)' required><option value=''>选择录入类型(必填项)</option>";
+                              <% Xmt::Core::Dict.dicts(:field_type).each do |dict|%>
+                    str_tr +="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                              <% end %>
+                    str_tr +=" </td></select>";
+                    str_tr += "<td><input type=text  class=form-control placeholder='例如：你好' name='xmt_press_page_type[page_attrs][][def_datas]' value=''/></td>";
+                    str_tr += " <td class='center'>";
+                    str_tr += "<button class='del_form btn btn-xs btn-bricky tooltips'onclick='del_form(this)'>删除</button>";
+                    str_tr += "</td>";
+
+                function append_field(){
+                  $(".main_cont").append(str_tr);
+                  $("#vive-submit").css("display","block");
+                }
+                function del_form(Obj) {
+                  Obj.parentNode.parentNode.remove();
+                }
+
+                function del_form_id(Obj,id) {
+                  Obj.parentNode.parentNode.remove();
+                  $("#delete_ids").append("<input type='hidden' value='"+id+"' name='delete_ids[]'/>")
+                }
+
+                function chang(obj,text){
+                    switch (text) {
+                        case 'text':
+                            var default_value = "<td><input type='text'  class=form-control placeholder='例如：你好' name='xmt_press_page_type[page_attrs][][def_datas]' value=''/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'file':
+                            var default_value = "<td><input type='text'  class=form-control placeholder='例如：你好111' name='xmt_press_page_type[page_attrs][][def_datas]' value=''/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'select':
+                            var default_value = "<td><input type='text' placeholder='例如：值|名称,值1|名称1（每个‘值|名称’间用‘,’隔开）' class=form-control name='xmt_press_page_type[page_attrs][][def_datas]'/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'radio':
+                            var default_value = "<td><input type='text' placeholder='例如：值|名称,值1|名称1（每个‘值|名称’间用‘,’隔开）' class=form-control name='xmt_press_page_type[page_attrs][][def_datas]'/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'checkbox':
+                            var  html_modle = '<div class="form-group attr_datas">'+
+                                '<label class="col-sm-2 control-label">默认值</label>'+
+                                '<div class="col-sm-6">'+
+                                '<input type=text placeholder="例如：值|名称,值1|名称1（每个‘值|名称’间用‘,’隔开）" class=form-control name="xmt_press_page_type[page_attrs][][def_datas]"/>'+
+                                '</div>'+
+                                '</div>';
+                            var default_value = "<td><input type='text' placeholder='例如：值|名称,值1|名称1（每个‘值|名称’间用‘,’隔开）' class=form-control name='xmt_press_page_type[page_attrs][][def_datas]'/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'textarea':
+                            var default_value = "<td><input type='text' placeholder='例如：你好' class=form-control name='xmt_press_page_type[page_attrs][][def_datas]'/></td>";
+                            $(obj).parent().next().replaceWith(default_value);
+                            break;
+                        case 'data':
+                            var modle_html = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][attr_relation]' onchange='chang_condition(this,this.value)' required><option value=''>选择关联类型</option>";
+                             <% Xmt::Core::Dict.dicts(:relation_type).each do |dict|%>
+                              modle_html+="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                             <%end%>
+                            modle_html+="</select>";
+                            var  html_modle = '<div class="form-group attr_relation">'+
+                                '<label class="col-sm-2 control-label">关联类型</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html+
+                                '</div>'+
+                                '</div>';
+                            var  html_condition = '<div class="form-group attr_condition"></div>';
+                            var  condition_value = '<div class="form-group condition_value"></div>';
+                            $(obj).parent().parent().parent().find(".attr_datas").remove()
+                            if ($(obj).parent().parent().parent().find(".attr_relation").length <=0){
+                                $(obj).parent().parent().parent().append(html_modle+html_condition+condition_value);
+                            }
+
+                            break;
+                        default:
+                            $(obj).parent().parent().parent().find(".def_datas").html('<input type=text placeholder="例如：你好" class=form-control name="xmt_press_page_type[page_attrs][][def_datas]"/>');
+                    }
+                }
+
+                function chang_condition(obj,text){
+                    switch (text)
+                    {
+                        case 'channel':
+                            var modle_html = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][attr_condition]'  required><option value=''>选择关联条件</option>";
+                        <% Xmt::Core::Dict.dicts(:condition_channel).each do |dict|%>
+                            modle_html+="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                        <%end%>
+                            modle_html+="</select>";
+                            var  html_field ='<label class="col-sm-2 control-label">关联条件</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html+
+                                '</div>';
+                            var modle_html_c = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][relation_data]'  required><option value=''>选择关联数据</option>";
+                        <% ChannelMap.new(@site).nested_set_options.each do |channel|%>
+                            modle_html_c+="<option value=<%=channel[1]%>><%=channel[0]%></option>";
+                        <%end%>
+                            modle_html+="</select>";
+                            var  html_modle_c = '<label class="col-sm-2 control-label">关联数据</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html_c+
+                                '</div>';
+                            $(obj).parent().parent().parent().find(".attr_condition").html(html_field);
+                            $(obj).parent().parent().parent().find(".condition_value").html(html_modle_c);
+                            break;
+                        case 'dict':
+                            var modle_html = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][attr_condition]'  required><option value=''>选择关联条件</option>";
+                        <% Xmt::Core::Dict.dicts(:condition_channel).each do |dict|%>
+                            modle_html+="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                        <%end%>
+                            modle_html+="</select>";
+                            var  html_field ='<label class="col-sm-2 control-label">关联条件</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html+
+                                '</div>';
+                            var modle_html_c = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][relation_data]'  required><option value=''>选择关联数据</option>";
+                        <% Xmt::Core::Dict.where(typ:nil).each do |dict|%>
+                            modle_html_c+="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                        <%end%>
+                            modle_html_c+="</select>";
+                            var  html_field_c ='<label class="col-sm-2 control-label">关联数据</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html_c+
+                                '</div>';
+                            $(obj).parent().parent().parent().find(".attr_condition").html(html_field);
+                            $(obj).parent().parent().parent().find(".condition_value").html(html_field_c);
+                            break;
+                        case 'dept':
+                            var modle_html = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][attr_condition]'  required><option value=''>选择关联条件</option>";
+                        <% Xmt::Core::Dict.dicts(:condition_channel).each do |dict|%>
+                            modle_html+="<option value=<%=dict.sign%>><%=dict.title%></option>";
+                        <%end%>
+                            modle_html+="</select>";
+                            var  html_field ='<label class="col-sm-2 control-label">关联条件</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html+
+                                '</div>';
+                            var modle_html_c = "<select class='form-control'  name='xmt_press_page_type[page_attrs][][relation_data]'  required><option value=''>选择关联数据</option>";
+                        <% Xmt::Staff::DeptApplication.all.each do |dept|%>
+                            modle_html_c+="<option value=<%=dept.id%>><%=dept.ancestors_and_self_name_format%></option>";
+                        <%end%>
+                            modle_html+="</select>";
+                            var  html_modle_c = '<label class="col-sm-2 control-label">关联数据</label>'+
+                                '<div class="col-sm-6">'+
+                                modle_html_c+
+                                '</div>';
+                            $(obj).parent().parent().parent().find(".attr_condition").html(html_field);
+                            $(obj).parent().parent().parent().find(".condition_value").html(html_modle_c);
+                            break;
+                        default:
+                            $(obj).parent().parent().parent().find(".def_datas").html('<input type=text placeholder="例如：你好" class=form-control name="xmt_press_page_type[page_attrs][][def_datas]"/>');
+                    }
+                }
+
+                function check_sign(obj){
+                    alert( $(obj).val())
+                }
+              </script>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4" id="add-input"></div>
+          <div class="col-sm-2" id="vive-submit">
+            <input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交">
+          </div>
+          <div class="col-sm-2">
+            <a title="添加属性" class="btn btn-primary" href="javascript:;" onclick="append_field()">
+              添加属性 </a>
+          </div>
+          <div class="col-sm-1">
+            <a title="返回" class="btn btn-primary" href="<%= xmt_press_page_types_path %>">
+              <i class="fa fa-reply"></i> </a>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

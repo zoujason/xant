@@ -1,0 +1,93 @@
+<!--
+<div class="page-header">
+  <h1>查看碎片<small></small></h1>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    &lt;!&ndash; start: TEXT FIELDS PANEL &ndash;&gt;
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+        <div class="form-group">
+          碎片名称：
+          <div class="col-sm-9">
+            <%= @snippet.title %>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          Sign：
+          <div class="col-sm-9">
+            <%= @snippet.sign %>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          碎片内容：
+          <div class="col-sm-9">
+            <%= @snippet.cont %>
+          </div>
+        </div>
+      </div>
+    </div>
+    &lt;!&ndash; end: TEXT FIELDS PANEL &ndash;&gt;
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_xmt_press_snippet_path(@snippet) %> |
+<%= link_to 'Back', xmt_press_snippets_path %>
+-->
+
+
+
+
+
+<div class="page-header">
+  <h1>查看文章<small></small></h1>
+</div>
+<% render 'shares/flash_messages'%>
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left">碎片名称：</td>
+        <td class="column-right">
+          <%= @snippet.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">碎片标识：</td>
+        <td class="column-right">
+          <%= @snippet.sign %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">碎片内容：</td>
+        <td class="column-right">
+          <%= @snippet.cont %>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <a class="btn btn-teal" href="<%=  xmt_press_snippets_path%>">
+        <i class="fa fa-reply"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= edit_xmt_press_snippet_path(@snippet)%>">
+        <i class="fa fa-edit"></i>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+

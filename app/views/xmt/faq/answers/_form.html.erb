@@ -1,0 +1,57 @@
+<%= form_for(@answer) do |f| %>
+
+    <%= render 'shares/errors', obj: @answer if @answer.errors.any? %>
+
+    <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            title：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:title, class: "form-control",placeholder:"title",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+        <label class="col-sm-2 control-label" for="form-field-4">
+          qty：<span class="symbol required"></span>
+        </label>
+        <div class="col-sm-9">
+          <%= f.text_field(:qty, class: "form-control",placeholder:"qty",required:"required") %>
+        </div>
+      </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            question_id：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.select :question_id,Xmt::Faq::Question.all.collect { |p| [ p.title, p.id ] },{},{ :class => 'form-control'}%>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            pic：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:pic, class: "form-control",placeholder:"pic",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            seq：<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:seq, class: "form-control",placeholder:"seq",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+          <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_faq_answers_url%>">
+            <i class="fa fa-reply"></i> </a></div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

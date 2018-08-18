@@ -1,0 +1,177 @@
+<div class="page-header">
+  <h1>创建试卷<small></small></h1>
+</div>
+<div class="panel-body">
+  <%= form_for(@paper, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}",onSubmit:"return validate()" }) do |f| %>
+      <%= render 'shares/errors', obj: @paper if @paper.errors.any? %>
+      <div class="col-sm-12">
+        <%= f.hidden_field(:exam_id,value:@exam.id)  %>
+        <!-- start: TEXT FIELDS PANEL -->
+        <div id="questions_area">
+          <h2 class="text-center">试题区</h2>
+          <%= raw exam_rules(@exam)  %>
+          <div id="add_button" class="text-center row">
+            <div class="col-lg-1 col-md-2 col-sm-2 col-lg-offset-4">
+              <a href="javascript:void(0)" class="btn btn-primary next-step" onclick="add_question('Xmt::Test::SingleChoice')">创建单选题</a>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2">
+              <a href="javascript:void(0)" class="btn btn-primary next-step" onclick="add_question('Xmt::Test::MultipleChoice')">创建多选题</a>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2">
+              <a href="javascript:void(0)" class="btn btn-primary next-step" onclick="add_question('Xmt::Test::BinaryChoice')">创建判断题</a>
+            </div>
+            <div class="col-lg-1 col-md-2 col-sm-2">
+              <button type="button" class="btn btn-success select_question" data-toggle="modal" data-target="#myQuestions">
+                题库选题
+              </button>
+            </div>
+          </div>
+          <div class='error'></div>
+        </div>
+
+
+      </div>
+      <div class="form-group">
+
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2">
+          <input type="submit" name="commit" value="创建" class="btn btn-blue next-step btn-block" >
+        </div>
+        <div class="col-sm-2">
+          <a class="btn btn-primary" href="<%= xmt_test_exams_path %>">
+          <i class="fa fa-reply"></i>
+          </a>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+<!--创建单选题-->
+<div id="Question_add" >
+  <div class="col-sm-10 question_view">
+   <h4 class="question_content">编辑试题内容<span>?</span></h4>
+    <ul class="question_answers">
+      <li><input type="radio" readonly><span>选项1</span></li>
+      <li><input type="radio" readonly><span>选项2</span></li>
+    </ul>
+  </div>
+  <div class="question_btns col-sm-10 col-lg-offset-2">
+    <a class="btn btn-info edit" href="javascript:void(0)" role="button">完成</a>
+    <a class="btn btn-success add_answer" href="javascript:void(0)" role="button">新增选项</a>
+    <a class="btn btn-danger delete" href="javascript:void(0)" role="button">删除</a>
+  </div>
+  <div class="question_edit col-sm-12">
+    <div class="form_area col-sm-10 col-lg-offset-1 col-sm-offset-1">
+      <h4>试题编辑区</h4>
+      <label for="inputPassword" class="col-lg-2 col-sm-4 control-label">试题内容</label>
+      <div class="col-lg-10 col-sm-8">
+        <textarea name="xmt_test_paper[questions][][content]" class='form-control edit_content' style='height:3em' placeholder="试题内容" ></textarea>
+      </div>
+      <label for="inputPassword" class="col-lg-2 col-sm-4 control-label">所属分类</label>
+      <div class="col-lg-6 col-sm-4">
+        <%= select_tag "xmt_test_paper[questions][][category_id]",options_for_select(category_options(@exam.category)) ,class: "form-control" %>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <div class="input-group">
+          <input type='number' name="xmt_test_paper[questions][][score]" placeholder="请输入试题分值" class='form-control question_score'>
+          <div class="input-group-addon">分</div>
+        </div>
+
+      </div>
+      <label for="inputPassword" class="col-lg-2 col-sm-4 control-label">设置选项</label>
+      <div class="col-lg-10 col-sm-8 answer_item">
+        <div class='col-lg-8 col-sm-6'>
+          <div class='checkbox'>
+            <input type='checkbox' class='answer_righted' style="margin-top: 10px;" name='xmt_test_paper[questions][][answers][0][righted]' value='true'/>
+            <input name='xmt_test_paper[questions][][answers][0][title]' class='form-control answer_content'  placeholder="选项内容" value="选项1"/>
+          </div>
+        </div>
+        <div class='col-lg-4 col-sm-6'>
+          <div class="input-group" style="margin-top: 6px;">
+            <input type='text' name='xmt_test_paper[questions][][answers][0][score]' class='form-control score' placeholder='选项分值' />
+            <div class="input-group-addon">分</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-lg-10 col-sm-8  col-lg-offset-2 col-sm-offset-4 answer_item">
+        <div class='col-lg-8 col-sm-6'>
+          <div class='checkbox'>
+            <input type='checkbox' class='answer_righted' style="margin-top: 10px;" name='xmt_test_paper[questions][][answers][1][righted]' value='true'/>
+            <input name='xmt_test_paper[questions][][answers][1][title]' class='form-control answer_content' placeholder="选项内容" value="选项2"/>
+          </div>
+        </div>
+        <div class='col-lg-4 col-sm-6'>
+          <div class="input-group" style="margin-top: 6px;">
+            <input type='text' name='xmt_test_paper[questions][][answers][1][score]' class='form-control score' placeholder='选项分值' />
+            <div class="input-group-addon">分</div>
+          </div>
+        </div>
+      </div>
+      <div class='col-sm-10 col-lg-offset-1 col-sm-offset-1 item_error'></div>
+    </div>
+  </div>
+</div>
+
+
+<!--弹框-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="myQuestions">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">题库</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" id="filter">
+          <form id="filter_form" >
+            <input type="hidden" name="select_exam" value="<%= @exam.id  %>">
+            <input type="hidden" name="select_question_page" value="1">
+            <div class="col-md-6">
+              <%= select_tag "select_question_category",options_for_select([['全部',nil]]+category_options(@exam.category)) ,class: "form-control filter_category" %>
+            </div>
+            <div class="col-md-4">
+              <%= select_tag "question_question_type", options_for_select([['全部',nil]]+Xmt::Core::Dict.dicts_options("question_typ")),class:"form-control filter_typ"  %>
+            </div>
+            <div class="col-md-1"><a class="btn btn-default select_question_next" href="javascript:void(0)" role="button">换一批</a></div>
+          </form>
+          <!--<div class="col-md-1"><a class="btn btn-default question_search" href="javascript:void(0)" role="button">筛选</a></div>-->
+
+        </div>
+        <div id="Question_list" style="margin-top:5px;">
+          <!--<input type="hidden" name="question_index" value="0">-->
+          <% @questions.each do |question| %>
+              <div class="row question_library_item" style="margin: 0 15px;">
+                <input type="hidden" name="select_question_id" value="<%= question.id %>">
+                <input type="hidden" name="select_question_type" value="<%= question.class %>">
+                <div class="col-md-10">
+                  <p><span  class="select_question_content"><%= question.content %></span><span>(<%= question.score  %>分)</span></p>
+                  <ul class="select_answers">
+                    <%question.answers.each do |answer| %>
+                        <li><input type="radio" readonly ><span><%= answer.title  %></span></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <div class="col-md-1 ">
+                  <a class="btn btn-warning question_item_add hide" href="javascript:void(0)" role="button" style="margin-top: 50px;">添加</a>
+                </div>
+                <!--<div class="col-md-1 ">-->
+                  <!--<a class="btn btn-success question_item_copy hide" href="javascript:void(0)" role="button" style="margin-top: 50px;">复制</a>-->
+                <!--</div>-->
+              </div>
+          <% end %>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_include_tag 'admin/Sortable.min', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'admin/paper', 'data-turbolinks-track': 'reload' %>
+
+
+
+

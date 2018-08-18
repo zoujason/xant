@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../app/assets/javascripts/admin/jquery.js">
+
+    </script>
+</head>
+<style>
+    .question{font-size: 14px;margin: 5px;}
+    .answer{margin: 5px;}
+    .q-add{margin: 5px;background: #0f74a8;}
+    .q-del{margin: 5px;background: #f06e57;}
+    .a-del{margin: 5px;background: #f06e57;}
+</style>
+<body>
+<div class="poll">
+<ul>
+    <li class="question" >
+        <span>title:</span><input type="text" name="question[][title]" > seq:<input type="text" name="question[][seq]" size="5"><a href="#" class="q-add" >add</a><a href="#" class="q-del" >del</a>
+        <ul>
+            <li class="answer"><span>Answer title</span><input type="text" name="question['+index+'][answers][][title]" ><a  class="a-del">del</a></li>
+            <li class="answer"><span>Answer title</span><input type="text" name="question['+index+'][answers][][title]" ><a  class="a-del">del</a></li>
+        </ul>
+    </li>
+</ul>
+</div>
+
+<script type="text/javascript">
+    jQuery.fn.Extend({
+        poll: function () {
+            this.each(function () {
+                new Poll(this);
+            });
+        }
+    });
+
+   $('.poll').poll();
+
+</script>
+</body>
+</html>

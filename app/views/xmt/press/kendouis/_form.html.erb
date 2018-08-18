@@ -1,0 +1,17 @@
+<%= form_with(model: xmt_press_kendoui, local: true) do |form| %>
+  <% if xmt_press_kendoui.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(xmt_press_kendoui.errors.count, "error") %> prohibited this xmt_press_kendoui from being saved:</h2>
+
+      <ul>
+      <% xmt_press_kendoui.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

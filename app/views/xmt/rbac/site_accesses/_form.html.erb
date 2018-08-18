@@ -1,0 +1,17 @@
+<%= form_for(mgr_site_access) do |f| %>
+  <% if mgr_site_access.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mgr_site_access.errors.count, "error") %> prohibited this mgr_site_access from being saved:</h2>
+
+      <ul>
+      <% mgr_site_access.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

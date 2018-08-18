@@ -1,0 +1,1 @@
+json.partial! "mgr_static_pages/mgr_static_page", mgr_static_page: @mgr_static_page

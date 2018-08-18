@@ -1,0 +1,1 @@
+json.partial! "mgr_dicts/mgr_dict", mgr_dict: @mgr_dict

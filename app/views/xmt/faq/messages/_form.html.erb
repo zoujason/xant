@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!-- start: TEXT FIELDS PANEL -->
+    <div class="panel-body">
+      <%= form_for(@message, html: {class: "form-horizontal" }) do |f| %>
+          <% if message.errors.any? %>
+              <%= render 'shares/errors', obj: message %>
+          <% end %>
+          <div class="form-group">
+            <%= f.label(:site, "所属站点：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.collection_select :site_id, [@site], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:title, "标题：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_field(:title, class: "form-control",required:"required") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:email, "Email：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_field(:email, class: "form-control",required:"required") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:tel, "Tel：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_field(:tel, class: "form-control",required:"required") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:cont, "内容：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_area(:cont, class: "form-control")%>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:checked, "审核：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+                  <%= f.check_box(:checked, {}, "true", "false")%>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:rcmded, "显示：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+                  <%= f.check_box(:rcmded, { }, "true", "false")%>
+
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:reply, "回复：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_area(:reply, class: "form-control")%>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+            <div class="col-sm-1">  <a class="btn btn-primary" href="<%=  xmt_faq_messages_path%>">
+              <i class="fa fa-reply"></i> </a></div>
+          </div>
+      <% end %>
+    </div>
+    <!-- end: TEXT FIELDS PANEL -->
+  </div>
+</div>
+

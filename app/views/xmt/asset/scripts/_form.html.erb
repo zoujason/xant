@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <div class="tab-content">
+        <div class="panel-body">
+          <%= form_for(@script, html: {class: "form-horizontal", onkeydown: "if(event.keyCode==13){return false;}", id: 'script_form'}) do |f| %>
+              <%= render 'shares/errors', obj: @script if @script.errors.any? %>
+              <%= f.hidden_field(:slug) %>
+              <%= f.hidden_field(:parent_id) %>
+              <input type="hidden" name="site_id" value="<%= @site.id %>">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件名
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_field(:name, class: "form-control", required: "required",placeholder:'此处输入中文描述') %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件描述
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_field(:title, class: "form-control", required: "required") %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件内容
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_area(:file_con, class: "form-control", style: "height:300px", required: "required",contenteditable:true) %>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="col-sm-5"></div>
+                <div class="form-group col-sm-2">
+                  <input type="submit" id="commit" name="commit" value="确认提交" class="btn btn-green btn-block" data-disable-with="确认提交">
+                </div>
+                <div class="col-sm-1">
+                  <a title="返回" class="btn btn-primary" href="<%= xmt_asset_scripts_path(site_id:@site.id)%>">
+                    <i class="fa fa-reply"></i> </a>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("xmt_asset_script_file_con"), {
+        height: "800px",//设置初始化高度
+        value : "",  // 文本域默认显示的文本
+        mode : "text/html",  // 模式
+        theme : "default blackboard",  // CSS样式选择
+        indentUnit : 2,  // 缩进单位，默认2
+        smartIndent : true,  // 是否智能缩进
+        tabSize : 4,  // Tab缩进，默认4
+        readOnly : false,  // 是否只读，默认false
+        showCursorWhenSelecting : true,
+        lineNumbers : true  // 是否显示行号
+        // .. 还有好多，翻译不完。需要的去看http://codemirror.net/doc/manual.html#config
+    });
+
+
+    var text = $("#xmt_asset_script_file_con").html();
+    var array = text.split("\n");
+    var name = array[0];
+    var reg = /[\u4e00-\u9fa5]/g;
+    var names = name.match(reg);
+    if (names != null) {
+        name = names.join("");
+        $("#xmt_asset_script_title").val(name);
+    }
+
+    $("#commit").click(function () {
+        document.getElementById('script_form').submit();
+    });
+
+    $("#xmt_asset_script_title").blur(function(){
+        var desc = "// title: ";
+        desc += $("#xmt_asset_script_title").val();
+        editor.replaceSelection(desc);
+    });
+
+
+//    function ceratebiaoqian() {
+//        var get_snippet = "";
+//        get_snippet = '<!=get_snippet("newslist")!>'
+//        editor.replaceSelection(get_snippet.replace(/!/g, "%"))
+//    }
+
+</script>
+<script type="text/javascript">
+    function checkForm1() {
+        var cont = document.getElementById("xmt_asset_script_file_con").innerHTML;
+        if(cont.split("\n")[0].match("title") != '' && cont.split("\n")[0].match("title") != null){
+            return true;
+        }else{
+            alert("请在编辑区首行添加：‘// title : 描述内容’");
+            return false;
+        }
+    }
+</script>

@@ -1,0 +1,1 @@
+json.array! @xmt_mgr_passwords, partial: 'xmt_mgr_passwords/xmt_mgr_password', as: :xmt_mgr_password

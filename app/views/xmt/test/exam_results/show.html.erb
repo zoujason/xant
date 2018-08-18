@@ -1,0 +1,7 @@
+<%= render 'xmt/test/public/header'  %>
+<div class="container" style="margin-top: 50px;">
+  <% flash.each do |message_type,message|   %>
+      <%= content_tag(:div,message,class:"alert alert-#{message_type} text-center")  %>
+  <% end %>
+  <p class="text-center">你的得分:<%= @total_marks %></p>
+</div>

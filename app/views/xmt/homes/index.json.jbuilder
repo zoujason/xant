@@ -1,0 +1,1 @@
+json.array! @mgr_homes, partial: 'mgr_homes/mgr_home', as: :mgr_home

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs tab-bricky">
+        <% @sites.each do |site| %>
+            <li class="<%= site.id == @site.id ? 'active' : '' %>">
+              <%= link_to site.name, xmt_press_channels_path(site_id: site.id) %>
+            </li>
+        <% end %>
+
+      </ul>
+      <div class="tab-content">
+        <div id="panel_tab_example1" class="tab-pane active">
+          <%#= @menu_table.to_s.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

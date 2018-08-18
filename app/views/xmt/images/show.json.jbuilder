@@ -1,0 +1,1 @@
+json.partial! "mgr_images/mgr_image", mgr_image: @mgr_image

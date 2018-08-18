@@ -1,0 +1,1 @@
+json.partial! "mgr_documents/mgr_document", mgr_document: @mgr_document

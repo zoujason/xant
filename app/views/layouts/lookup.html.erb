@@ -1,0 +1,182 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta content="XmtPress Content Management" name="description" />
+  <meta content="XmtPress" name="xmt" />
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+  <!-- end: META -->
+  <style>
+    /* 清除浮动 */
+    .clear, .data_box, .info_box, ul, dl{ zoom:1}
+    .clear:after, .data_box:after, .info_box:after, ul:after, dl:after{ content:''; display:block; clear:both;}
+
+
+
+
+
+    /* 文本框 */
+    input.text{ height: 22px; line-height:22px; border:1px solid #ddd; padding-left:5px;}
+
+
+
+
+
+    /* 按钮.btn_gray_h30{ height: 30px; border: 1px solid #eee; background: url(../../images/trade/bnt_gray_h30.png) repeat-x; border-radius: 3px; -moz-border-radius: 3px; color:#333; cursor: pointer;} */
+    .btn_yellow{ border: 1px solid #FF6401; background-color: #FF8700; border-radius: 3px; -moz-border-radius: 3px; color: #fff; cursor: pointer;}
+    .btn_yellow:hover{ background-color: #FFA200;}
+
+
+    /* box */
+    .box_1{ border: 1px solid #ddd;}
+    .box_1 .box1_title{ width: 100%; height: 30px; background-color: #f7f7f7; border-bottom: 1px solid #ddd; line-height: 30px; font-size: 14px; text-indent: 10px; position: relative;}
+    .box_1 .box1_title .btn_gray, .box_1 .box1_title .btn_yellow{ width: 50px; height: 24px; margin-right: 15px; font-size: 12px;}
+    /*.box_1 .box1_title .arrows{ width: 20px; height: 11px; background: url("../../images/trade/box1_title_arrows.png") no-repeat; position: absolute;}*/
+    .box_1 .box1_title .more{ color: #004ea1; font-size: 12px; float: right; margin-right: 5px;}
+    .box_2 .box2_title{ width: 100%; height: 30px; border-bottom: 1px solid #e8e8e8; line-height: 30px; font-size: 14px; text-indent: 10px; position: relative;}
+    .box_2 .box2_title .operation{ height: 14px; position: absolute; top: 9px; left: 110px;}
+    .box_2 .box2_title .operation a{ text-indent: 0; float: left; margin-right: 35px;}
+    .box_2 .box2_title .more{ color: #004ea1; font-size: 12px; float: right; margin-right: 5px;}
+    .box_2 .box2_content{ border: 1px solid #e8e8e8;}
+
+
+    /* info_box */
+    .info_box{ width: 100%; height: 24px;}
+    .info_box .box_title{ height: 24px; line-height: 24px; text-align: right; float: left;}
+    .info_box .box_text{ height: 24px; line-height: 24px; float: left;}
+    .info_box .box_text, .box_text{ position: relative;}
+    .info_box .box_text .address_span{ float: left; position: relative;}
+    .info_box .box_text .address_span .error{ left: 3px;}
+    .info_box .box180{ width: 180px; float: left;}
+    .info_box .box180 .box_title{ width: 80px;}
+    .info_box .box180 .box_text{ width: 100px;}
+    .info_box .box253{ width: 253px; float: left;}
+    .info_box .box253 .box_title{ width: 90px;}
+    .info_box .box253 .box_text{ width: 163px;}
+    .info_box .box260{ width: 260px; float: left;}
+    .info_box .box260 .box_title{ width: 90px;}
+    .info_box .box260 .box_text{ width: 170px;}
+    .info_box .box285{ width: 285px; float: left;}
+    .info_box .box285 .box_title{ width: 90px;}
+    .info_box .box285 .box_text{ width: 195px;}
+    .info_box .box310{ width: 310px; float: left;}
+    .info_box .box310 .box_title{ width: 90px;}
+    .info_box .box310 .box_text{ width: 220px;}
+    .info_box .box332{ width: 332px; float: left;}
+    .info_box .box332 .box_title{ width: 90px;}
+    .info_box .box332 .box_text{ width: 242px;}
+    .info_box .box370{ width: 370px; float: left;}
+    .info_box .box370 .box_title{ width: 90px;}
+    .info_box .box370 .box_text{ width: 310px;}
+    .info_box .box425{ width: 425px; float: left;}
+    .info_box .box425 .box_title{ width: 90px;}
+    .info_box .box425 .box_text{ width: 335px;}
+    .info_box .box465{ width: 465px; float: left;}
+    .info_box .box465 .box_title{ width: 90px;}
+    .info_box .box465 .box_text{ width: 375px;}
+    .info_box .box499{ width: 499px; float: left;}
+    .info_box .box499 .box_title{ width:179px;}
+    .info_box .box499 .box_text{ width: 320px;}
+    .info_box .box507{ width: 507px; float: left;}
+    .info_box .box507 .box_title{ width: 60px;}
+    .info_box .box507 .box_text{ width: 440px;}
+    .info_box .box510{ width: 510px; float: left;}
+    .info_box .box510 .box_title{ width: 90px;}
+    .info_box .box510 .box_text{ width: 420px;}
+    .info_box .box580{ width: 580px; float: left;}
+    .info_box .box580 .box_title{ width: 50px;}
+    .info_box .box580 .box_text{ width: 530px;}
+    .info_box .box620{ width: 620px; float: left;}
+    .info_box .box620 .box_title{ width: 90px;}
+    .info_box .box620 .box_text{ width: 530px;}
+    .info_box .box700{ width: 700px; float: left;}
+    .info_box .box700 .box_title{ width: 90px;}
+    .info_box .box700 .box_text{ width:610px;}
+    .info_box .box750{ width: 750px; float: left;}
+    .info_box .box750 .box_title{ width:150px;}
+    .info_box .box750 .box_text{ width:600px;}
+    .info_box .box800{ width: 800px; float: left;}
+    .info_box .box800 .box_title{ width:90px;}
+    .info_box .box800 .box_text{ width:710px;}
+    .info_box .box760{ width: 760px; float: left;}
+    .info_box .box760 .box_title{ width: 90px;}
+    .info_box .box760 .box_text{ width: 670px;}
+    .info_box .box930{ width: 930px; float: left;}
+    .info_box .box930 .box_title{ width: 90px;}
+    .info_box .box930 .box_text{ width: 840px;}
+    .info_box .box998{ width: 998px; float: left;}
+    .info_box .box998 .box_title{ width: 179px;}
+    .info_box .box998 .box_text{ width: 800px;}
+    .info_box .box998 .long_text{margin-left:6px; height:24px; line-height:24px; border:1px solid #DDD; float:left;}
+
+    .info_box input.text, .info_box .text_address, .info_box .text_date, .info_box .text_website, .info_box .spinner, .info_box .word, .info_box .file-box{ float: left;}
+    .info_box .unit{ float: left; margin-left: 3px;}
+    .info_box .star{ height: 24px; line-height: 27px; float: left;}
+    .info_box .btn input{ width: 80px; height: 26px; float: left;}
+    .info_box .box260.btn .btn_yellow{ margin: 0 20px 0 50px;}
+    .info_box .box332.btn .btn_yellow{ margin: 0 20px 0 112px;}
+
+
+
+    /* data_box */
+    .data_title{height:29px;line-height:29px;background:#F7F7F7; border-bottom:1px solid #ddd;}
+    .data_title span{float:left;color:#666; text-align:center;}
+    /*.data_box span{float:left;color:#666; text-align:center;}*/
+    .data_box div{float:left;}
+
+
+    /* 数据列表鼠标经过变色 */
+    .data_list .data_box.hover{ background-color: #DDEEFF;}
+    /*没有数据时的样式*/
+    .no_data{ height: 60px; line-height: 60px; text-align:center}
+
+    /*超出内容部分用省略号*/
+    .txt_apostrophe{word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    /* 列表无数据样式*/
+    .data_list .nodata{ width: 100%; height: 45px; line-height: 45px; text-align: center; color: #999999; font-size: 12px;}
+    .data_list .nodata.height60{ height: 60px;}
+    .last_line_long{ width:100%; border:1px solid #DDD;overflow: hidden;}
+
+    /*普通查询*/
+    .advanced_select{display:none;}
+
+    .main{ width: 1190px; margin: 10px auto 20px;}
+    .advmsg_manage .box_1{ width: 998px;}
+    .display_none{ display: none;}
+    /*部门机构管理1*/
+    .orgaManage1 .box1_title{color:#666; height:40px; line-height:40px;}
+    .orgaManage1 .box1_title input{margin-left:10px;  border:1px solid #DDD;height:22px;line-height:22px; padding:0 10px;}
+    .orgaManage1 .cont_list{width:97.4%; padding:22px 0 20px; margin:0 auto;}
+    .orgaManage1 .cont_left{ width:202px; margin-right:7px; display:inline;float:left; height:736px;}
+    .orgaManage1 .cont_box{ border:1px solid #DDD; overflow: hidden;}
+    .orgaManage1 .cont_left .cont_box{ width: 200px; height:730px;overflow:auto;}
+    .orgaManage1 .cont_title{height:36px;line-height:36px;background:#F7F7F7; padding-left:18px;}
+    .orgaManage1 .cont_right{width:762px; float:left;}
+    .orgaManage1 .cont_right .cont_box{ width: 760px; height:730px;}
+    .orgaManage1 .cont_right .box2_title{ height:43px; line-height:54px;overflow:hidden; border-bottom:2px solid #ddd; width:95%; margin-left:26px;}
+    .orgaManage1 .box2_content{padding-top:30px;}
+    .orgaManage1 .info_box{ padding-bottom:30px;}
+    .orgaManage1 .check span{ margin:0 15px;}
+    .orgaManage1 .check input{cursor: pointer;margin: 5px 10px 0 0;}
+    .orgaManage1 .text_address{ margin-right: 3px;}
+    .orgaManage1 .btns{ padding: 0;}
+    .orgaManage1 .box2_title input{ width: 50px; height: 24px; font-size: 12px; margin-right: 5px;}
+
+    /*部门机构 弹框*/
+    .grey_box.Branch1{ width: 800px; height: 570px;}
+    .grey_box.Branch1 .info_box{ width: 780px; margin: auto; padding: 25px 0;}
+    .grey_box.Branch1 .box_1{ width: 750px; margin: auto;}
+    .grey_box.Branch1 .data_list .data_box span{ height: 35px; line-height: 35px;}
+    .grey_box.Branch1 .data1{ width: 140px;}
+    .grey_box.Branch1 .data2{ width: 500px;}
+    .grey_box.Branch1 .data3{ width: 320px;}
+  </style>
+</head>
+<body>
+<%= yield %>
+</body>
+</html>

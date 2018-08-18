@@ -1,0 +1,29 @@
+<div class="page-header">
+  <h1>菜单项管理<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs tab-bricky">
+        <% @menus.each do |menu| %>
+            <li class="<%= menu.id == @menu.id ? 'active' : '' %>">
+              <%= link_to menu.name, xmt_nav_menu_items_path(parent_id: menu.id) %>
+            </li>
+        <% end %>
+      </ul>
+      <%= @menu_table.to_s.html_safe %>
+    </div>
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <%= link_to new_xmt_nav_menu_item_path(parent_id: @menu.id) ,  "class":"btn btn-orange add-row" do %>
+          <i class="fa fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+</div>

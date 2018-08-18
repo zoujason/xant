@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Xmt Mgr Passwords</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @xmt_mgr_passwords.each do |xmt_mgr_password| %>
+      <tr>
+        <td><%= link_to 'Show', xmt_mgr_password %></td>
+        <td><%= link_to 'Edit', edit_xmt_mgr_password_path(xmt_mgr_password) %></td>
+        <td><%= link_to 'Destroy', xmt_mgr_password, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Xmt Mgr Password', new_xmt_mgr_password_path %>

@@ -1,0 +1,1 @@
+json.array! @mgr_addons, partial: 'mgr_addons/mgr_addon', as: :mgr_addon

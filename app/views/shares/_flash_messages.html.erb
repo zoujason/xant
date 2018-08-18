@@ -1,0 +1,39 @@
+<% if flash[:sms].present? %>
+    <div class="alert alert-success">
+      <button data-dismiss="alert" class="close">
+        ×
+      </button>
+      <i class="fa fa-check-circle"></i>
+      <strong>完成!</strong> <%= raw(flash[:sms]) %>
+    </div>
+<% end %>
+
+<% if flash[:info].present? %>
+    <div class="alert alert-info">
+      <button data-dismiss="alert" class="close">
+        ×
+      </button>
+      <i class="fa fa-info-circle"></i>
+      <strong>消息!</strong> <%= raw(flash[:info]) %>
+    </div>
+<% end %>
+
+<% if flash[:alert].present? %>
+    <div class="alert alert-warning">
+      <button data-dismiss="alert" class="close">
+        ×
+      </button>
+      <i class="fa fa-exclamation-triangle"></i>
+      <strong>警告!</strong> <%= raw(flash[:alert]) %>
+    </div>
+<% end %>
+
+<% if flash[:error].present? %>
+    <div class="alert alert-danger">
+      <button data-dismiss="alert" class="close">
+        ×
+      </button>
+      <i class="clip-close-2-circle"></i>
+      <strong>错误!</strong> <%= raw(flash[:error]) %>
+    </div>
+<% end %>

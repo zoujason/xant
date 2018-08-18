@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family:"Microsoft YaHei"; }
+
+html,div,ul,li,a,*{
+	margin: 0px;
+	padding: 0px;}
+a{text-decoration:none;}
+@media screen and (max-width:640px) { 
+
+.wmb_bg{ width:100%; height:42em; background-image:url(../images/wmb_001.png); background-repeat:no-repeat; background-size:100% 42em;}
+.wmb_content{ width:70%; height:8em;   color:#ebd102; margin-left:16%; margin-top:15.5em; position:absolute; line-height:192%;}
+.wmb_content p{ width:100%; height:8em;overflow-x:hidden;font-size:12px;}
+.wmb_content_button{ width:90%; height:1.5em; margin-top:0.5em; margin-left:auto; margin-right:auto;}
+.wmb_content_button_1{ width:45%; height:1.5em; float:left; overflow:hidden;}
+.wmb_content_button_2{ width:45%; height:1.5em; float:left; overflow:hidden; margin-left:10%;}
+
+
+.wmb_content_left { width:100%; height:1.5em;overflow:hidden;}
+.wmb_content_left img{width:100%; height:1.5em;overflow:hidden;}
+
+	.pop {  display: none;  width: 130%;  height:18em;  position: absolute;  top: -6em;  left:-16%;  bottom: 0;  right: 0;     z-index: 130;  border-radius: 8px;  background-color: #fff;  box-shadow: 0 3px 18px rgba(100, 0, 0, .5);  }
+	
+	
+	.pop-foot{  height:50px;  line-height:50px;  width:100%;    text-align: right; margin-top:4em;}
+	.pop-cancel, .pop-ok {  padding:8px 15px;  border: none;  border-radius: 5px;  background-color: #337AB7;  color: #fff;  cursor:pointer;  }
+	.pop-cancel {  background-color: #FFF;  border:1px #CECECE solid;  color: #000;  }
+	.pop-content{  height:14em;  }
+	.pop-content-left{  float: left;  }
+	
+	
+	.bgPop{  display: none;  position: absolute;  z-index: 129;  left: 0;  top: 0;  width: 100%;  height: 100%;  background: rgba(0,0,0,.2);  }
+	.wmb_bg_button_left{ width:40%; height:4em; overflow:hidden; margin-top:24.5em; position:absolute; float:left; margin-left:10%;}
+	.wmb_bg_button_left img{width:100%; height:4em;}
+	.wmb_bg_button_right{ width:40%; height:4em; overflow:hidden; margin-top:24.5em; position:absolute; float:left; margin-left:53%; }
+	.wmb_bg_button_right img{width:100%; height:4em;}
+
+}

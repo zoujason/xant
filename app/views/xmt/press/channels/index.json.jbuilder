@@ -1,0 +1,1 @@
+json.array! @mgr_channels, partial: 'mgr_channels/mgr_channel', as: :mgr_channel

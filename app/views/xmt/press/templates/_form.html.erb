@@ -1,0 +1,167 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <div class="tab-content">
+        <div class="panel-body">
+          <%= form_for(@template, html: {class: "form-horizontal", onkeydown: "if(event.keyCode==13){return false;}", id: 'template_form'}) do |f| %>
+              <%= render 'shares/errors', obj: @template if @template.errors.any? %>
+              <%= f.hidden_field(:slug) %>
+              <%= f.hidden_field(:parent_id) %>
+              <input type="hidden" name="site_id" value="<%= @site.id %>">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件名
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_field(:name, class: "form-control", required: "required") %>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件描述
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_field(:title, class: "form-control", required: "required",placeholder:'此处输入中文描述') %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  选择标签内容
+                </label>
+                <div class="col-sm-9">
+                  <div class="col-sm-2"><a href="#responsive" data-toggle="modal" class="btn btn-primary" >选择标签</a></div>
+                </div>
+              </div>
+              <div style="display: none" id="tag">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="form-field-1">
+                  </label>
+                  <div class="col-sm-9">
+                    <div class="col-sm-2"><a class="btn btn-primary" >选择标签</a></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="form-field-1">
+                  文件内容</br>首行需要添加描述标签
+                </label>
+                <div class="col-sm-9">
+                  <%= f.text_area(:file_con, class: "form-control", style: "height:300px", required: "required",contenteditable:true) %>
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="col-sm-5"></div>
+                <div class="form-group col-sm-2">
+                  <input type="submit" id="commit" name="commit" value="确认提交" class="btn btn-green btn-block" data-disable-with="确认提交">
+                </div>
+                <div class="col-sm-1">
+                  <a title="返回" class="btn btn-primary" href="<%= xmt_press_templates_path()%>">
+                    <i class="fa fa-reply"></i> </a>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--新加弹出框 --李鸿瑶 开始-->
+<div id="responsive" class="modal fade" tabindex="-1" data-width="760" style="display: none;top: 20%;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+      &times;
+    </button>
+    <h4 class="modal-title">标签</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row modal-content-max-height">
+      <div class="col-md-12">
+
+        <div class="tabbable tabs-left">
+          <ul id="myTab3" class="nav nav-tabs tab-green">
+            <% Xmt::Press::Snippet.all.each_with_index  do |sni,i|%>
+                <% if i == 0 %>
+                    <li class="active"><a href="#panel_tab<%= i + 1 %>" data-toggle="tab"><%= sni.title %></a></li>
+                <% else %>
+                    <li class=""><a href="#panel_tab<%= i + 1 %>" data-toggle="tab"><%= sni.title %></a></li>
+                <% end %>
+
+            <% end %>
+          </ul>
+          <div class="tab-content" id="tag_cont">
+            <% Xmt::Press::Snippet.all.each_with_index  do |sni,i|%>
+                <% if i == 0 %>
+                    <div class="tab-pane tab-max-height active" id="panel_tab<%= i + 1 %>">
+                      <p>
+                        <%= sni.try(:cont) %>
+                      </p>
+                    </div>
+                <% else %>
+                    <div class="tab-pane tab-max-height" id="panel_tab<%= i + 1 %>">
+                      <p>
+                        <%= sni.try(:cont) %>
+                      </p>
+                    </div>
+                <% end %>
+            <% end %>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn btn-light-grey">
+      关闭
+    </button>
+    <button type="button" class="btn btn-blue" onclick="insert_tag()">
+      确定
+    </button>
+  </div>
+</div>
+<!--新加弹出框 --李鸿瑶 结束-->
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("xmt_press_template_file_con"), {
+        height: "800px",//设置初始化高度
+        value : "",  // 文本域默认显示的文本
+        mode : "text/html",  // 模式
+        theme : "default blackboard",  // CSS样式选择
+        indentUnit : 2,  // 缩进单位，默认2
+        smartIndent : true,  // 是否智能缩进
+        tabSize : 4,  // Tab缩进，默认4
+        readOnly : false,  // 是否只读，默认false
+        showCursorWhenSelecting : true,
+        lineNumbers : true  // 是否显示行号
+        // .. 还有好多，翻译不完。需要的去看http://codemirror.net/doc/manual.html#config
+    });
+
+    var text = $("#xmt_press_template_file_con").html();
+    var array = text.split("\n");
+    var name = array[0];
+    var reg = /[\u4e00-\u9fa5]/g;
+    var names = name.match(reg);
+    if (names != null) {
+        name = names.join("");
+        $("#xmt_press_template_title").val(name);
+    }
+
+    $("#commit").click(function () {
+        document.getElementById('template_form').submit();
+    });
+
+    function insert_tag(){
+        var tag_cont = $("#tag_cont .active p").text();
+        editor.replaceSelection(tag_cont)
+    }
+
+    $("#xmt_press_template_title").blur(function(){
+        var desc = "<!# title: ";
+            desc += $("#xmt_press_template_title").val();
+            desc += " !>"
+        editor.replaceSelection(desc.replace(/!/g, "%"));
+    });
+
+</script>

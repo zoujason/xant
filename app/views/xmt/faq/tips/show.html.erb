@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>查看邮箱<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="panel panel-body panel-default">
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2  control-label"><span class="text-danger"></span><strong>邮箱标题：</strong></label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.title %></p>
+    </div>
+  </div>
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2  control-label"><span class="text-danger"></span><strong>邮箱时间：</strong></label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.published_at && @tip.published_at.strftime('%Y-%m-%d %H:%M:%S').to_s  %></p>
+    </div>
+  </div>
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger"></span><strong>邮箱内容：</strong></label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.cont %></p>
+    </div>
+  </div>
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger"></span><strong>邮箱回复：</strong></label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.reply %></p>
+    </div>
+  </div>
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger"></span><strong>回复人:</strong>
+    </label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.replyname %></p>
+    </div>
+  </div>
+  <div class="form-group marbot0">
+    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span class="text-danger"></span><strong>回复时间：</strong></label>
+    <div class="col-sm-9 col-xs-12">
+      <p class="form-control-static"><%= @tip.replytime && @tip.replytime.strftime('%Y-%m-%d %H:%M:%S').to_s  %></p>
+    </div>
+  </div>
+
+</div>
+
+<div class="col-lg-12 space20">
+  <%= link_to  xmt_faq_tips_path(site_id:params[:site_id]), class: "btn btn-primary" do %>
+      <i class="fa fa-reply"></i>
+  <% end %>
+</div>
+
+

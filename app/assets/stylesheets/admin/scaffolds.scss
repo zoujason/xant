@@ -1,0 +1,28 @@
+#error_explanation {
+  width: 90%;
+  border: 1px solid #ebccd1;
+  padding: 7px;
+  padding-bottom: 0;
+  margin: 15px;
+  background-color: #f2dede;
+  color: #a94442;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 14px;
+    margin: -7px;
+    margin-bottom: 0;
+    background-color: #f2dede;
+    color: #a94442;
+  }
+  ul li {
+    font-size: 14px;
+    list-style: square;
+    color: #a94442;
+
+  }
+}
+#notice {
+  color: green;
+}

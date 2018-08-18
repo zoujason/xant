@@ -1,0 +1,57 @@
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <div class="panel-body">
+
+        <%= form_for([:xmt, @profile], html: {class: "form-horizontal" , onkeydown:"if(event.keyCode==13){return false;}" }) do |f| %>
+            <% if @profile.errors.any? %>
+                <%= render 'shares/errors', obj: @profile %>
+            <% end %>
+            <div class="form-group">
+              <%= f.label(:title, "名称：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:title, class: "form-control",required:"required") %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <%= f.label(:site,"所属站点：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.select(:parent_id, Site.all.collect { |p| [ p.title, p.id ] },{}, class: "form-control") %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:tpl, "模板：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:tpl, class: "form-control",required:"required") %>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <%= f.label(:seq, "排序：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.number_field(:seq,required:"required") %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+              <div class="col-sm-1">  <a class="btn btn-primary" href="<%= xmt_mgr_profiles_path(site_id: @site.id)%>">
+                <i class="fa fa-reply"></i> </a></div>
+
+            </div>
+
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<br>

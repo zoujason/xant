@@ -1,0 +1,264 @@
+<div class="row">
+  <div class="col-sm-12">
+    <!-- start: TEXT FIELDS PANEL -->
+
+
+    <div class="panel-body">
+      <%= form_for(@snippet, html: {class: "form-horizontal", onkeydown: "if(event.keyCode==13){return false;}"}) do |f| %>
+
+          <%= render 'shares/errors', obj: @snippet if @snippet.errors.any? %>
+          <div class="form-group">
+            <%= f.label(:title, "标签名称：", class: "col-sm-2 control-label") %>
+            <div class="col-sm-9">
+              <%= f.text_field(:title, class: "form-control", required: "required") %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label(:sign, "标签标识：", class: "col-sm-2 control-label") %>
+            <div class="col-sm-2">
+              <%= f.text_field(:sign, class: "form-control", required: "required") %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:tag_type, "选择生成器：", class: "col-sm-2 control-label")%>
+            <div class="col-sm-2">
+              <%= f.collection_select :tag_type, Xmt::Core::Dict.dicts(:tag_type), :sign, :title, {prompt: true }, class: "form-control" ,onchange:"shengchengqi(this)"%>
+            </div>
+          </div>
+          <!--生成标签-->
+          <div class="scq_list" style="display: none">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">选择栏目：</label>
+              <div class="col-sm-2">
+                <%= select_tag 'channel', options_from_collection_for_select(Xmt::Press::Channel.where(parent_ids:BSON.ObjectId(@site.id)), "id", "title"), prompt: '请选择',multiple: true,class: 'form-control'%>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">选择排序：</label>
+              <div class="col-sm-2">
+                <select class="form-control" id="sort">
+                  <option value="">请选择</option>
+                  <option value="rcmd_level">推荐等级降序</option>
+                  <option value="headline_level">头条等级降序</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">跳转方式：</label>
+              <div class="col-sm-2">
+                <select class="form-control" id="target">
+                  <option value="_self">当前页面</option>
+                  <option value="_blank">新打开页面</option>
+                  <option value="_parent">父级页面</option>
+                  <option value="_top">整个窗口中</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">推荐/头条：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <select class="form-control" id="rcmd">
+                      <option value="">请选择推荐/头条</option>
+                      <option value="rcmd">推荐</option>
+                      <option value="head">头条</option>
+                    </select>
+                  </label>
+                  <select class="form-control" id="dengji" style="display: none">
+                    <option value="">请选择等级</option>
+                    <option value="1">第一级</option>
+                    <option value="2">第二级</option>
+                    <option value="3">第三级</option>
+                    <option value="4">第四级</option>
+                    <option value="5">第五级</option>
+                    <option value="6">第六级</option>
+                    <option value="7">第七级</option>
+                    <option value="8">第八级</option>
+                    <option value="9">第九级</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">每页显示条数：</label>
+              <div class="col-sm-2">
+                <input type="number" class="square-teal" id="pagenum" value="0">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">客户端：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="radio" class="square-teal" name="pc" value="article_list"> PC
+                  </label>
+                  <label>
+                    <input type="radio" class="square-teal" name="pc" value="m_article_list">WAP
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">图片：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input class="square-teal" type="checkbox" name="image" id="image">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">简介：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input class="square-teal" type="checkbox" name="info" id="info">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">日期：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input class="square-teal" type="checkbox" name="date" id="date">
+                  </label>
+                  <select class="form-control" id="datetype">
+                    <option value="%Y-%m-%d">Y-m-d</option>
+                    <option value="%Y-%m-%d %H:%M:%S">Y-m-d H:m:s</option>
+                    <option value="%Y/%m/%d">Y/m/d</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scq_content" style="display: none">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">客户端：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="radio" class="square-teal" name="pc_content" value="article_content"> PC
+                  </label>
+                  <label>
+                    <input type="radio" class="square-teal" name="pc_content" value="m_article_content">WAP
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">副标题：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" class="square-teal" name="subtit" id="subtit">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">政务公开：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" class="square-teal" name="gkml" id="gkml">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">作者：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" class="square-teal" name="author" id="author">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">来源：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" class="square-teal" name="source" id="source">
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">日期：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" class="square-teal" name="content_date" id="content_date">
+                  </label>
+                  <select class="form-control" id="content_datetype">
+                    <option value="%Y-%m-%d">Y-m-d</option>
+                    <option value="%Y-%m-%d %H:%M:%S">Y-m-d H:m:s</option>
+                    <option value="%Y/%m/%d">Y/m/d</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">分享：</label>
+              <div class="col-sm-2">
+                <div>
+                  <label>
+                    <input type="checkbox" name="share" id="share">
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2"><a class="btn btn-primary" onclick="ceratebiaoqian()">自动生成</a></div>
+          </div>
+          <!--生成标签-->
+
+          <div class="form-group">
+            <%= f.label(:cont, "标签内容：", class: "col-sm-2 control-label") %>
+            <div class="col-sm-9">
+              <%= f.text_area(:cont, class: "form-control") %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+              <input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交">
+            </div>
+            <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_press_snippets_path %>">
+              <i class="fa fa-reply"></i> </a></div>
+
+          </div>
+
+      <% end %>
+    </div>
+    <!-- end: TEXT FIELDS PANEL -->
+  </div>
+</div>
+<script>
+    var editor = CodeMirror.fromTextArea(document.getElementById("xmt_press_snippet_cont"), {  // 标识到textarea
+        mode: "htmlmixed",  // 模式
+        //theme : "night",  // CSS样式选择
+        indentUnit: 2,  // 缩进单位，默认2
+        smartIndent: true,  // 是否智能缩进
+        tabSize: 4,  // Tab缩进，默认4
+        readOnly: false,  // 是否只读，默认false
+        showCursorWhenSelecting: true,
+        lineNumbers: true  // 是否显示行号
+    });
+</script>
+<!--var myTextarea = document.getElementById('xmt_press_template_file_con');-->
+<!--var CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {-->
+<!--mode: "htmlmixed",-->
+<!--lineNumbers: true-->
+<!--});-->

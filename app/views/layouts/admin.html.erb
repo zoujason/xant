@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8 no-js" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9 no-js" lang="en"><![endif]-->
+<!--[if !IE]>
+<html class="no-js">
+<![endif]-->
+<head>
+  <title>XmtPress Admin Templates</title>
+  <link rel="shortcut icon" href="<%= asset_path('admin/favicon.ico')%>" />
+  <!-- start: META -->
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta content="XmtPress Content Management" name="description" />
+  <meta content="XmtPress" name="xmt" />
+  <!-- end: META -->
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-absolute-top">
+  <!-- start: TOP NAVIGATION CONTAINER -->
+  <div class="container">
+    <div class="navbar-header">
+      <!-- start: RESPONSIVE MENU TOGGLER -->
+      <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+        <span class="clip-list-2"></span>
+      </button>
+      <!-- end: RESPONSIVE MENU TOGGLER -->
+      <!-- start: LOGO -->
+      <a class="navbar-brand" href="#">
+        Xmt<i class="fa fa-fire"></i>Press
+      </a>
+      <!-- end: LOGO -->
+    </div>
+    <div class="navbar-tools">
+      <!-- start: TOP NAVIGATION MENU -->
+      <ul class="nav navbar-right">
+        <!-- start: USER DROPDOWN -->
+        <li class="dropdown current-user">
+          <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+            <%= image_tag('admin/avatar-1-small.jpg', class: 'circle-img', alt: '')%>
+            <span class="username"><%= subject.username %></span>
+            <i class="fa fa-angle-double-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="/xmt/staff/managers/<%= subject.user_id %>/edit">
+                <i class="fa fa-user"></i> &nbsp;修改个人信息
+              </a>
+            </li>
+            <li>
+              <a href="/xmt/staff/managers/<%= subject.user_id %>/edit?pass_edit=1">
+                <i class="clip-calendar"></i> &nbsp;修改密码
+              </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="/xmt/sessions/0" data-method="delete">
+                <i class="fa fa-sign-out"></i>&nbsp;退出
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- end: USER DROPDOWN -->
+        <!-- start: PAGE SIDEBAR TOGGLE -->
+        <!-- end: PAGE SIDEBAR TOGGLE -->
+      </ul>
+      <!-- end: TOP NAVIGATION MENU -->
+    </div>
+  </div>
+  <!-- end: TOP NAVIGATION CONTAINER -->
+</div>
+
+<div class="main-container">
+  <div class="navbar-content">
+    <!-- start: SIDEBAR -->
+    <div class="main-navigation navbar-collapse collapse">
+      <!-- start: MAIN MENU TOGGLER BUTTON -->
+      <div class="navigation-toggler">
+        <i class="fa fa-angle-left clip-chevron-left-view"></i>
+        <i class="fa fa-angle-right clip-chevron-right-view"></i>
+      </div>
+      <!-- end: MAIN MENU TOGGLER BUTTON -->
+      <!-- start: MAIN NAVIGATION MENU -->
+    <%= menu_render() %>
+      <!-- end: MAIN NAVIGATION MENU -->
+    </div>
+    <!-- end: SIDEBAR -->
+  </div>
+
+  <!-- start: PAGE -->
+  <div class="main-content">
+    <!-- start: PANEL CONFIGURATION MODAL FORM -->
+    <div class="modal fade" id="panel-config" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title">Panel Configuration</h4>
+          </div>
+          <div class="modal-body">
+            Here will be a configuration form
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">
+              Save changes
+            </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <!-- end: SPANEL CONFIGURATION MODAL FORM -->
+    <div class="container" style="min-height: 880px!important;">
+      <!-- start: PAGE HEADER -->
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- start: STYLE SELECTOR BOX -->
+          <!-- end: STYLE SELECTOR BOX -->
+          <!-- start: PAGE TITLE & BREADCRUMB -->
+          <%= render 'shares/breadcrumb' %>
+          <!-- end: PAGE TITLE & BREADCRUMB -->
+        </div>
+      </div>
+
+
+      <!-- end: PAGE HEADER -->
+
+      <!-- start: PAGE CONTENT -->
+      <%= yield %>
+      <!-- end: PAGE CONTENT-->
+    </div>
+  </div>
+  <!-- end: PAGE -->
+</div>
+<div class="footer clearfix">
+  <div class="footer-inner">
+    黑龙江新媒体集团
+  </div>
+  <div class="footer-items">
+    <span class="go-top"><i class="clip-chevron-up"></i></span>
+  </div>
+</div>
+<script>
+  jQuery(document).ready(function() {
+    var $input = $('input.file[type=file]');
+    if ($input.length) {
+      $input.fileinput();
+    }
+    Main.init();
+    $('.accordion-wrap').accordion(200,".accordion-wrap",".accordion-control" ,".accordion-panel");
+    $(".footer-inner").prepend(new Date().getFullYear());
+  });
+
+</script>
+</body>
+</html>

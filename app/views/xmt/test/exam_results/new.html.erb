@@ -1,0 +1,66 @@
+<%= render 'xmt/test/public/header'  %>
+<div class="container" style="margin-top: 50px;">
+  <h1 class="text-center"><%= @paper.try(:title)  %></h1>
+  <% unless notice.blank? %>
+      <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong><%= raw notice %></strong>
+      </div>
+  <% end %>
+  <div class="content col-md-8 col-md-offset-3">
+    <%= form_for(:exam_result,url: xmt_test_exam_results_path , html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}" }) do |f| %>
+        <input type="hidden" name="user_id" value="<%= current_user.id %>">
+        <input type="hidden" name="paper_id" value="<%= @paper.id %>">
+    <% unless (single=Xmt::Test::SingleChoice.in(id:@paper.questions.map(&:id))).blank? %>
+        <div id="Radio">
+          <h2>单选题(共计<%= single.length  %>题)</h2>
+          <ol>
+            <% single.each do |question_id|%>
+                <input type="hidden" name="results[<%= question_id.id  %>][question]" value="<%= question_id.id  %>">
+                <li><%= raw question_format(question_id.id ,'radio')  %></li>
+            <% end %>
+          </ol>
+        </div>
+    <% end %>
+    <% unless (multiple=Xmt::Test::MultipleChoice.in(id:@paper.questions.map(&:id))).blank? %>
+        <div id="multiple">
+          <h2>多选题(共计<%=  multiple.length  %>题)</h2>
+          <ol>
+            <%  multiple.each do |question_id|%>
+                <input type="hidden" name="results[<%= question_id.id  %>][question]" value="<%= question_id.id   %>">
+                <li><%= raw question_format(question_id.id ,'multiple')  %></li>
+            <% end %>
+          </ol>
+        </div>
+    <% end %>
+    <% unless (binary=Xmt::Test::BinaryChoice.in(id:@paper.questions.map(&:id))).blank? %>
+        <div id="multiple">
+          <h2>判断题(共计<%=  binary.length  %>题)</h2>
+          <ol>
+            <%  binary.each do |question_id|%>
+                <input type="hidden" name="results[<%= question_id.id  %>][question]" value="<%= question_id.id  %>">
+                <li><%= raw question_format(question_id.id,'radio')  %></li>
+            <% end %>
+          </ol>
+        </div>
+    <% end %>
+
+    <div class="row text-right">
+      <div class="col-sm-2 col-lg-offset-3"><input type="submit" name="commit" value="提交" class="btn btn-blue next-step btn-block" ></div>
+    </div>
+    <% end %>
+  </div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    function single_choice(self){
+        if(self.is(':checked')){
+            self.parents('.answers').find("input:checkbox").not(self).attr("checked",false);
+        }
+
+    }
+</script>
+
+
+

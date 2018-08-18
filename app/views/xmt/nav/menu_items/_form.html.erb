@@ -1,0 +1,59 @@
+<%= form_for(@menu_item) do |f| %>
+        <% if @menu_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@menu_item.errors.count, "error") %>禁止保存数据:</h2>
+      <ul>
+      <% @menu_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-1">
+            菜单项名称<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:name, class: "form-control",placeholder:"输入菜单项名称",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-2">
+            所属菜单项<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.select :parent_id, nested_set_options(@menu, Xmt::Nav::MenuItem),{},{ :class => 'form-control'}  %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-3">
+            菜单项路径<span class="symbol required"></span>
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:path, class: "form-control",placeholder:"输入菜单项路径",required:"required") %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="form-field-4">
+            菜单项图标
+          </label>
+          <div class="col-sm-9">
+            <%= f.text_field(:icon, class: "form-control",placeholder:"输入菜单项图标") %>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+          <div class="col-sm-1">  <a class="btn btn-primary" href="<%= xmt_nav_menu_items_path(parent_id: params[:parent_id])%>">
+            <i class="fa fa-reply"></i> </a></div>
+
+        </div>
+      </div>
+    </div>
+
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mgr Privileges</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>role</th>
+      <th>res</th>
+      <th>op</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mgr_privileges.each do |mgr_privilege| %>
+      <tr>
+        <td><%= mgr_privilege.role.try(:name) %></td>
+        <td><%= mgr_privilege.resource.try(:name) %></td>
+        <td><%#= mgr_privilege.operation.try(:name) %><%= mgr_privilege.operation_id%></td>
+        <td><%= link_to 'Show', mgr_manager_path(mgr_privilege) %></td>
+        <td><%= link_to 'Edit', edit_mgr_privilege_path(mgr_privilege) %></td>
+        <td><%= link_to 'Destroy', mgr_manager_path(mgr_privilege), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mgr Privilege', new_mgr_privilege_path %>

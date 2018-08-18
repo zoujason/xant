@@ -1,0 +1,17 @@
+<%= form_for(mgr_permission) do |f| %>
+  <% if mgr_permission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mgr_permission.errors.count, "error") %> prohibited this mgr_permission from being saved:</h2>
+
+      <ul>
+      <% mgr_permission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

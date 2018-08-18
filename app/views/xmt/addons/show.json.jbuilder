@@ -1,0 +1,1 @@
+json.partial! "mgr_addons/mgr_addon", mgr_addon: @mgr_addon

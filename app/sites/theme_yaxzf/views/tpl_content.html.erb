@@ -1,0 +1,30 @@
+<%#title:%>
+<div class="content">
+  <div class="breadcrumbs">
+    <span class="prev_tit">首页</span><span class="prev_navrow">>></span><span class="current_tit"><%= @page.attr('parent.title') %></span>
+  </div>
+  <div class="bordered_block">
+    <div class="article_tit1">
+      <h3><%= @page.attr(:title) %></h3>
+      <span><%= @page.attr(:subtitle) %></span>
+      <div class="sub_tit"><span>时间：<%= @page.attr(:published_at,{format:'%Y-%m-%d'}) %></span><span>作者：<%= @page.attr(:author,{author:'测试人'})%></span><span>来源：<%= @page.attr(:source,{source:'议案'})%></span></div>
+    </div>
+    <div class="article_cnt">
+      <%#= @page.pages_per_author().to_a[0]['matches'] %>
+      <%= @page.attr(:cust_index) %></br>
+      内容：<%= @page.attr('cont',{html_safe:true}) %>
+      <div class="bshare-custom icon-medium-plus">
+        <a title="分享到QQ空间" class="bshare-qzone"></a>
+        <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+        <a title="分享到人人网" class="bshare-renren"></a>
+        <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+        <a title="分享到网易微博" class="bshare-neteasemb"></a>
+        <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+        <span class="BSHARE_COUNT bshare-share-count"></span>
+      </div>
+      <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+      <a class="bshareDiv" onclick="javascript:return false;"></a>
+      <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    </div>
+  </div>
+</div>

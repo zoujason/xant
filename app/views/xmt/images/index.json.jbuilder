@@ -1,0 +1,1 @@
+json.array! @mgr_images, partial: 'mgr_images/mgr_image', as: :mgr_image

@@ -1,0 +1,1 @@
+json.array! @mgr_articles, partial: 'mgr_articles/mgr_article', as: :mgr_article

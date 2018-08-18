@@ -1,0 +1,1 @@
+json.partial! "mgr_menu_accesses/mgr_menu_access", mgr_menu_access: @mgr_menu_access

@@ -1,0 +1,97 @@
+<div class="page-header">
+  <h1>碎片管理<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-12">
+    <ul id="myTab" class="nav nav-tabs tab-bricky">
+      <% @sites.each do |site| %>
+          <% if subject.allow(site.id, 'visite') %>
+              <li class="<%= site.id == @site.id ? 'active' : '' %>">
+                <%= link_to site.name, xmt_press_snippets_path(site_id: site.id) %>
+              </li>
+          <% end %>
+      <% end %>
+    </ul>
+    <!-- start: BASIC TABLE PANEL -->
+      <div class="panel-body">
+        <div class="row">
+          <div id="sample_1_filter" class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-right dataTables_filter search-position">
+            <label>
+              <form >
+                <input type="search" name="key" class="form-control input-sm" placeholder="Search" aria-controls="sample_1">
+              </form>
+            </label>
+          </div>
+        </div>
+        <table class="table table-striped table-bordered table-hover table-full-width" id="sample-table-1">
+          <thead>
+          <tr>
+            <th class="text-center">标题</th>
+            <th class="text-center">标识</th>
+            <th class="text-center">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @snippets.each do |snippet| %>
+              <tr>
+                <td class="text-center" ><%= snippet.title%></td>
+                <td class="text-center"><%= snippet.sign%></td>
+                <td class="center">
+                  <div class="visible-md visible-lg hidden-sm hidden-xs">
+                        <%= link_to xmt_press_snippet_path(snippet), 'class': 'btn btn-xs btn-green tooltips', 'data-placement': 'top',  'data-original-title': '查看' do %>
+                        <i class="fa fa-eye"></i>
+                        <% end   %>
+                        <%= link_to edit_xmt_press_snippet_path(snippet), 'class': 'btn btn-xs btn-teal tooltips', 'data-placement': 'top',  'data-original-title': '修改' do %>
+                            <i class="fa fa-edit"></i>
+                        <% end   %>
+                        <%= link_to xmt_press_snippet_path(snippet), 'class': 'btn btn-xs btn-bricky tooltips', 'data-placement': 'top',  'data-original-title': '删除' , method: :delete, data: { confirm: '确定删除?' } do %>
+                            <i class="fa fa-times"></i>
+                        <% end   %>
+                  </div>
+                  <div class="visible-xs visible-sm hidden-md hidden-lg">
+                    <div class="btn-group">
+                      <a class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                        <i class="clip-cog"></i> <span class="caret"></span>
+                      </a>
+                      <ul role="menu" class="dropdown-menu pull-right">
+                            <li role="presentation">
+                              <%= link_to xmt_press_snippet_path(snippet), 'tabindex': '-1', 'role': 'menuitem' do %>
+                                  <i class="fa fa-share"></i> Share
+                              <% end %>
+                            </li>
+                            <li role="presentation">
+                              <%= link_to edit_xmt_press_snippet_path(snippet), 'tabindex': '-1', 'role': 'menuitem' do %>
+                                  <i class="fa fa-edit"></i> Edit
+                              <% end %>
+                            </li>
+                            <li role="presentation">
+                              <%= link_to xmt_press_snippet_path(snippet), 'tabindex': '-1', 'role': 'menuitem', method: :delete, data: { confirm: 'Are you sure?' } do %>
+                                  <i class="fa fa-times"></i> Remove
+                              <% end %>
+                            </li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+          <footer>
+            <tr><td colspan="3"><%= paginate @snippets, views_prefix: :xmt %></td></tr>
+          </footer>
+        </table>
+      </div>
+    <!-- end: BASIC TABLE PANEL -->
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <%= link_to new_xmt_press_snippet_path ,  "class":"btn btn-orange add-row" do %>
+          <i class="fa fa-plus"></i>
+      <% end if subject.allow(params[:m_id], :add)  %>
+    </div>
+  </div>
+</div>
+

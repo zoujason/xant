@@ -1,0 +1,1 @@
+json.partial! "xmt_mgr_passwords/xmt_mgr_password", xmt_mgr_password: @xmt_mgr_password

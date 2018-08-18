@@ -1,0 +1,66 @@
+<div id="sysNodeList" >
+  <div class="grey_box Branch1">
+      <div class="info_box">
+        <form action="<%= lookup_xmt_press_articles_url %>" method="get">
+          <input type="hidden" name="channel_id" value="<%=@channel.id%>">
+        <div class="box260 lt">
+          <div class="box_title">关键字：</div>
+
+          <div class="box_text">
+          <input type="text" class="text width150" id="noName" name="key" />
+        </div>
+        </div>
+        <div class="box260 btn">
+          <input type="submit" class="btn_yellow" value="查&nbsp;&nbsp;&nbsp;询" />
+        </div>
+        </form>
+      </div>
+    </form>
+
+    <div class="box_1">
+      <div class="box2_content">
+        <div class="data_list">
+          <div class="data_title">
+            <span  class="data2"  style="padding-left: 50px; text-align: left; color: #000;">标&nbsp;&nbsp;&nbsp;&nbsp;题</span>
+          </div>
+
+          <div class="data clear" style="padding-left: 20px">
+
+            <% @articles.each do |article|  %>
+            <div class="data_box">
+              <span class="data1"><input type="checkbox" name="id" value="<%=article.id %>" title="<%= article.title %>"></span>
+              <span class="data2"><%= article.title %></span>
+            </div>
+           <% end %>
+
+          </div>
+          <%= paginate @articles, views_prefix: :xmt %>
+        </div>
+      </div>
+    </div>
+
+    <div class="info_box">
+
+      <div class="box260 btn">
+        <input type="button" id="querySysNodeList" class="btn_yellow" value="确&nbsp;&nbsp;&nbsp;定"  />
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+   $("#querySysNodeList").click(function(){
+     var chk_value ="";
+     var relavale = [];
+     $(parent.document.getElementById("relationtolist")).find("input").each(function(){
+       relavale.push($(this).val());
+     });
+     $('input[name="id"]:checked').each(function(){
+       if($.inArray($(this).val(), relavale)<0){
+         chk_value += "<div><input type='checkbox' name='article[relationship_ids][]' checked value='"+$(this).val()+"'> "+$(this).attr('title')+"</div>";
+       }
+     });
+     $(parent.document.getElementById("relationtolist")).append(chk_value);
+     //$(parent.document).find(".window-container").children(".window-content").html("");
+     $(parent.document).find(".window-container").hide();
+   });
+</script>

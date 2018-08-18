@@ -1,0 +1,1 @@
+json.partial! "mgr_site_accesses/mgr_site_access", mgr_site_access: @mgr_site_access

@@ -1,0 +1,39 @@
+<div class="page-header">
+  <h1>评论回复<small></small></h1>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <%= form_tag('/xmt/press/comments/save_reply',method: :post,class: "form-horizontal" , onkeydown:"if(event.keyCode==13){return false;}" ) do %>
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left">评论内容：</td>
+        <td class="column-right">
+          <%= hidden_field_tag :comment_id , @comment.id %>
+          <%= @commnet_rply ? @commnet_rply.cont : @comment.cont %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">所属文章：</td>
+        <td class="column-right">
+          <%= @comment.page.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">回复内容：</td>
+        <td class="column-right">
+          <textarea rows="8" cols="50" name="cont"></textarea>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2"><input type="submit" name="commit" value="确认回复" class="btn btn-blue next-step btn-block" data-disable-with="确认回复"></div>
+          <div class="col-sm-1">  <a class="btn btn-primary" href="<%=  xmt_press_comments_path%>">
+            <i class="fa fa-reply"></i> </a></div>
+        </div>
+    <% end %>
+  </div>
+</div>
+

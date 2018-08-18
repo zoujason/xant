@@ -1,0 +1,1 @@
+json.partial! "mgr_comments/mgr_comment", mgr_comment: @mgr_comment

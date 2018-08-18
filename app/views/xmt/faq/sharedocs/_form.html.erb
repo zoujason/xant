@@ -1,0 +1,60 @@
+<div class="panel-body">
+  <%= form_for(@sharedoc, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+              <li class="active">
+                <a href="#panel_tab2_example1" data-toggle="tab">
+                  <i class="clip-home-2"></i>依申请公开信息
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane in active" id="panel_tab2_example1">
+                <div class="form-group">
+                  <%= f.hidden_field :id %>
+                  <%= f.hidden_field :site_id ,value:@site.id %>
+                  <%= f.label(:title,"标题：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:title, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:cont,"内容：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%#= f.cktext_area :cont, class: 'form-control'%>
+                    <%= f.text_area(:cont, class: "form-control")%>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <%= f.label(:published_at, "日期：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.datetime_field("published_at", min: "2014-01-01 00:00;00") %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4" id="add-input"></div>
+          <div class="col-sm-2" id="vive-submit">
+            <input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交">
+          </div>
+          <div class="col-sm-1">
+            <a title="返回" class="btn btn-primary" href="<%= xmt_faq_sharedocs_path(site_id: @site.try(:id))%>">
+              <i class="fa fa-reply"></i> </a>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+
+
+
+
+

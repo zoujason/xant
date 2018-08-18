@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+    <% item = Xmt::Nav::MenuItem.where(id: session[:m_id]).first %>
+      <% if item%>
+      <% item.ancestors.each_with_index do |a,i| %>
+          <% if i > 0%>
+          <li><a href="#"><%= a.name %></a></li>
+          <% end %>
+      <%end%>
+      <li><%= item.name %></li>
+      <%end%>
+</ol>

@@ -1,0 +1,3 @@
+module Poll
+
+end

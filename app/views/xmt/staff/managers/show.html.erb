@@ -1,0 +1,76 @@
+<div class="page-header">
+  <h1>查看用户<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left"><strong>登录名：</strong></td>
+        <td class="column-right">
+          <%= @manager.username %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>真实姓名：</strong></td>
+        <td class="column-right">
+          <%= @manager.name %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>性别：</strong></td>
+        <td class="column-right">
+          <%= Xmt::Core::Dict.title(@manager.gender, :gender_type) %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>电话：</strong></td>
+        <td class="column-right">
+          <%= @manager.tel %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>电子邮件：</strong></td>
+        <td class="column-right">
+          <%= @manager.email %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="column-left"><strong>所属角色：</strong></td>
+        <td class="column-right">
+          <%= @manager.roles.map(&:name).join('|')%>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>所属用户组：</strong></td>
+        <td class="column-right">
+          <%= @manager.groups.map(&:name).join('|')%>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>头像：</strong></td>
+        <td class="column-right">
+          <%= image_tag( @manager.avatar.url, width: 50, height: 50) unless @manager.avatar.blank? %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+
+      <a class="btn btn-teal" href="<%= edit_xmt_staff_manager_path(@manager)%>">
+        <i class="fa fa-edit"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= xmt_staff_managers_path%>">
+        <i class="fa fa-reply"></i>
+      </a>
+    </div>
+  </div>
+
+</div>

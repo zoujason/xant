@@ -1,0 +1,1 @@
+json.array! @mgr_comments, partial: 'mgr_comments/mgr_comment', as: :mgr_comment

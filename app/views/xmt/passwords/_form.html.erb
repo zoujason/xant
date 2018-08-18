@@ -1,0 +1,17 @@
+<%= form_for(xmt_mgr_password) do |f| %>
+  <% if xmt_mgr_password.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(xmt_mgr_password.errors.count, "error") %> prohibited this xmt_mgr_password from being saved:</h2>
+
+      <ul>
+      <% xmt_mgr_password.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,1 @@
+json.partial! "mgr_groups/mgr_group", mgr_group: @mgr_group

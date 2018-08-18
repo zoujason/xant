@@ -1,0 +1,1 @@
+json.array! @mgr_permissions, partial: 'mgr_permissions/mgr_permission', as: :mgr_permission

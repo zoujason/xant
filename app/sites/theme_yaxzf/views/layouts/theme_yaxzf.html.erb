@@ -1,0 +1,501 @@
+<%#title : 依安布局搜索 %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title><%= @page.id == @site.id ? "中国·依安" : "#{@page.title} - 中国·依安"%>插入的内容</title>
+  <meta name="keywords" content="中国·依安" />
+  <meta name="description" content="中国·依安" />
+  <%= stylesheet_link_tag 'theme_yaxzf', media: "all", 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'theme_yaxzf', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<!--- top link start --->
+<div class="top_link">
+  <div class="top_link_content">
+    <div class="top_link_content_left">
+      <a href="http://www.gov.cn/" target="blank" >中国政府网</a>
+      &nbsp;|&nbsp;
+      <a href="http://www.hlj.gov.cn/" target="blank">黑龙江省人民政府插入的内容</a>
+      &nbsp;|&nbsp;
+      <a href="http://www.qqhr.gov.cn/" target="blank">齐齐哈尔市人民政府</a>
+    </div>
+    <div class="top_link_content_center">
+      &nbsp;&nbsp;<a href="/pages/5a614cb0f6e9fa18b0c8b48a" >县委</a>
+      &nbsp;&nbsp;<a href="/pages/5a6146baf6e9fa1940998bfa" >县人大</a>
+        <a href="/pages/5a6146baf6e9fa1940998bfb" >县政府</a>
+      &nbsp;<a href="/pages/5a6146baf6e9fa1940998bfc" >县政协</a>
+    </div>
+    <!---20171018 add Weather Start--->
+    </div>
+    <!---20171018 add Weather End--->
+    <div style="clear:both;"></div>
+  </div>
+</div>
+<!--- top link end --->
+<!--- top img start --->
+<div class="top_img">
+  <div class="clouds_one"></div>
+  <div class="clouds_two"></div>
+  <div class="clouds_three"></div>
+</div>
+<!--- top img end --->
+<!--- part a nav start --->
+<div class="part_a">
+  <!--- nav start --->
+  <div class="navigation-v3">
+    <ul>
+      <li class="" _t_nav="home">
+        <a href="/" >网站首页</a>
+      </li>
+      <li class="" _t_nav="zjya">
+        <a href="/pages/5a6146b9f6e9fa1940998bc5" >走进依安</a>
+      </li>
+      <li class="" _t_nav="yaxw">
+        <a href="javascript:;" >依安新闻</a>
+      </li>
+      <li class="" _t_nav="zwgk">
+        <a href="/pages/5a6146b9f6e9fa1940998bd3" >政务公开</a>
+      </li>
+      <li class="" _t_nav="bsfw">
+        <a target="_blank" href="http://221.209.42.130:8855/qqhe_yzx/public/index" >网上办事</a>
+      </li>
+      <li _t_nav="zmhd">
+        <a href="javascript:;" >政民互动</a>
+      </li>
+      <li _t_nav="tzzn">
+        <a href="javascript:;" >投资指南</a>
+      </li>
+      <li _t_nav="ztbd">
+        <a href="javascript:;"  style="background-image:none;">专题报道</a>
+      </li>
+    </ul>
+  </div>
+  <div class="navigation-down">
+    <div id="zjya" class="nav-down-menu menu-1" style="display: none;" _t_nav="zjya">
+      <ul>
+        <% hlp_list_channel('5a6146b9f6e9fa1940998bc5').delete_if{|value| value.id==BSON::ObjectId('5a6146b9f6e9fa1940998bc9')}.each do |channel| %>
+        <li><a href="<%= channel.url  %>" ><%= channel.title  %></a></li>
+        <% end %>
+        <% hlp_list_channel('5a6146b9f6e9fa1940998bc9').each do |channel| %>
+        <li><a href="<%= channel.url  %>" ><%= channel.title  %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="yaxw" class="nav-down-menu menu-3 menu-1" style="display: none;" _t_nav="yaxw">
+      <ul style="margin-left: 183px;">
+        <% hlp_list_channel('5a6146b9f6e9fa1940998bce').each do |channel| %>
+          <li><a  href="<%= channel.url  %>" ><%= channel.title %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="zwgk" class="nav-down-menu menu-3 menu-1" style="display: none;" _t_nav="zwgk">
+      <ul style="margin-left: 162px;">
+        <li><a href="/pages/5a6146b9f6e9fa1940998bd2" >最新公开</a></li>
+        <li><a href="/pages/5a619a80f6e9fa22385b1524" >基本公开</a></li>
+        <li><a href="/pages/5a6146b9f6e9fa1940998bd5" >公开制度</a></li>
+        <li><a href="/pages/5a6146b9f6e9fa1940998bd4" >公开目录</a></li>
+        <li><a href="/pages/5a65846af6e9fa27e4812ca8" >重点领域</a></li>
+        <li style="background-image:none;"><a href="/sharedocs/new?id=5a6146baf6e9fa1940998bef" >依申请公开</a></li>
+      </ul>
+    </div>
+    <div id="zmhd" class="nav-down-menu menu-3 menu-1" style="display: none;" _t_nav="zmhd">
+      <ul style="margin-left: 558px;">
+        <li><a href="http://222.171.204.18:9091/2302/230223/"  target="_blank">领导信箱</a></li>
+        <li><a href="/pages/5a6146b9f6e9fa1940998bd7" >在线访谈</a></li>
+        <li><a href="/consultations/new?id=5a6146baf6e9fa1940998bf9" >网上咨询</a></li>
+        <li><a href="/pages/5a6146b9f6e9fa1940998bd9" >民意征集</a></li>
+        <li style="background-image:none;"><a href="/polls?id=5a6146baf6e9fa1940998bf6" >网上调查</a></li>
+      </ul>
+    </div>
+    <div id="tzzn" class="nav-down-menu menu-3 menu-1" style="display: none;" _t_nav="tzzn">
+      <ul style=" float: right">
+        <% hlp_list_channel('5a6146b9f6e9fa1940998bdf').each do |channel| %>
+          <li><a href="<%= channel.url  %>" ><%= channel.title  %></a></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="ztbd" class="nav-down-menu menu-3 menu-1" style="display: none;" _t_nav="ztbd">
+      <ul style="float: right">
+        <% hlp_list_channel('5a6146baf6e9fa1940998be2').each do |channel| %>
+          <li><a href="<%= channel.url  %>" ><%= channel.title  %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <!--- nav end --->
+</div>
+<!--- part a nav end --->
+<!--- part b news & search start --->
+<div class="part_b">
+  <!--- left start --->
+  <div class="part_b_left">
+    <ul>
+      <% hlp_list_article('5a6146b9f6e9fa1940998bce',{count:10,headline_level: '2'}).each do |new|%>
+      <li><a href="<%= new.url%>" ><%= new.title%></a></li>
+      <%end%>
+    </ul>
+  </div>
+  <!--- left end --->
+  <iframe allowtransparency="true" frameborder="0" style="float: left;"  width="220" height="28" scrolling="no" src="//tianqi.2345.com/plugin/widget/index.htm?s=3&z=1&t=0&v=0&d=1&bd=0&k=&f=&ltf=000000&htf=000000&q=1&e=0&a=0&c=60739&w=317&h=28&align=left"></iframe>
+  <!--- right start --->
+  <div class="part_b_right">
+    <%= form_tag('/searchs/5a6146baf6e9fa1940998bee',{method: "get", id:"search_form1"}) do %>
+        <input type="hidden" name="site_id" value="<%= @site.id %>">
+        <input class="part_b_right_input" size="22" id="keywords"  name="keywords" type="text">
+        <button class="part_b_right_button" type="submit" onclick="javascript: document.getElementById('search_form1').submit();">搜索</button>
+    <% end %>
+  </div>
+  <!--- right end --->
+  <div style="clear:both;"></div>
+</div>
+<!--- part b news & search end --->
+<!--内容部分开始-->
+<%= yield %>
+<!--内容部分结束-->
+<!--- part j link start --->
+<div class="part_j">
+  <!--link 代码 开始 -->
+  <ul>
+    <li class="" _t_nav="zwgka">
+      市县政府网站
+    </li>
+  </ul>
+  <div class="part_j_down">
+    <div id="zwgka" class="nav-down-menu menu-3 menu-1"  _t_nav="zwgka">
+      <table style="margin:0 auto;" class="black12_01" cellspacing="0" cellpadding="0" border="0" width="1130">
+        <tbody>
+        <tr>
+          <td><a class="black12_01"  href="http://www.qqhr.gov.cn/" title="齐齐哈尔"><b>齐齐哈尔市</b></a></td>
+          <td><a class="black12_01"  href="http://www.nehe.gov.cn/" title="讷河市">讷河市</a></td>
+          <td><a class="black12_01"  href="http://www.ljxrmzfw.gov.cn/" title="龙江县">龙江县</a></td>
+          <td><a class="black12_01"  href="http://www.hljyian.gov.cn/" title="依安县">依安县</a></td>
+          <td><a class="black12_01"  href="http://www.tailai.gov.cn/" title="泰来县">泰来县</a></td>
+          <td><a class="black12_01"  href="http://www.keshan.gov.cn/jone/keshan/" title="克山县">克山县</a></td>
+          <td><a class="black12_01"  href="http://www.kedong.gov.cn/" title="克东县">克东县</a></td>
+          <td><a class="black12_01"  href="http://www.baiquan.gov.cn/" title="拜泉县">拜泉县</a></td>
+          <td><a class="black12_01"  href="http://www.gannan.gov.cn/Default.aspx" title="甘南县">甘南县</a></td>
+          <td></td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <!-- 代码 结束 -->
+</div>
+
+<!--- part j link end --->
+
+<!--- part k foot start --->
+<div class="part_k">
+  <a href="<%= CGI::unescape(@site.attr(:party_office)) %>" class="part_k_a" target="_blank"><img id="imgConac" border="0" hspace="0" src="http://dcs.conac.cn/image/red.png" data-bd-imgshare-binded="1"></a>
+  <div class="part_k_b  f000">
+    <p><span>主办 : <%= @site.attr(:sponsor) %></span>     <span>承办 : <%= @site.attr(:undertaker) %></span>     <span>技术支持 : <a href="http://www.hljxmt.cn" target="_blank">黑龙江新媒体集团有限公司</a></span></p>
+    <p><span>联系电话(传真) : <%= @site.attr(:hotline) %> </span>   <span>E-mail : <%= @site.attr(:email) %></span></p>
+    <p><span>备案号 : <%= @site.attr(:icp) %></span>     <span>网安备案号 : <%= @site.attr(:netsafe_icp) %></span></p>
+    <p>建议使用：IE8以上浏览器或切换浏览器为极速模式，浏览器为1024以上分辨率</p>
+
+  </div>
+  <script class="part_k_c" id="_jiucuo_" src="http://pucha.kaipuyun.cn/exposure/jiucuo.js" sitecode="<%= @site.attr(:find_errors) %>"></script>
+
+  <div class="part_k_d">
+
+    <a href="/pages/59acf42c6df5eb22e8965624" >关于我们</a>  | <a href="/pages/5b593015f6e9fa20a4339774" >网站地图</a> |  <a href="/pages/59ae0fb36df5eb13b8fd4b80" >网站声明</a>  |  <a href="/pages/59acf42d6df5eb22e8965625" >联系我们</a>
+  </div>
+  <div style="clear: both;"></div>
+</div>
+<!--- part k foot end --->
+<script type="text/javascript">
+  //nav js begin
+  jQuery(document).ready(function(){
+    /* 图片滚动效果 */
+    $(".mr_frbox").slide({
+      titCell: "",
+      mainCell: ".mr_frUl ul",
+      autoPage: true,
+      effect: "leftLoop",
+      autoPlay: true,
+      vis: 2
+    });
+    var qcloud={};
+    $('[_t_nav]').hover(function(){
+      var _nav = $(this).attr('_t_nav');
+      clearTimeout( qcloud[ _nav + '_timer' ] );
+      qcloud[ _nav + '_timer' ] = setTimeout(function(){
+        $('[_t_nav]').each(function(){
+          $(this)[ _nav == $(this).attr('_t_nav') ? 'addClass':'removeClass' ]('nav-up-selected');
+        });
+        $('#'+_nav).stop(true,true).slideDown(200);
+      }, 150);
+    },function(){
+      var _nav = $(this).attr('_t_nav');
+      clearTimeout( qcloud[ _nav + '_timer' ] );
+      qcloud[ _nav + '_timer' ] = setTimeout(function(){
+        $('[_t_nav]').removeClass('nav-up-selected');
+        $('#'+_nav).stop(true,true).slideUp(200);
+      }, 150);
+    });
+  });
+  //nav js end
+  //part b left news turn up js begin
+  function autoScroll(obj){
+    $(obj).find("ul").animate({
+      marginTop : "-30px"
+    },500,function(){
+
+      $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);
+
+    })
+
+  }
+
+  $(function(){
+
+    setInterval('autoScroll(".part_b_left")',1600);
+
+  })
+
+  //part b left news turn up js end
+
+
+
+
+
+  //tab js begin
+
+  function setTab(name,cursel,n){
+
+    for(i=1;i<=n;i++){
+
+      var menu=document.getElementById(name+i);
+
+      var con=document.getElementById("con_"+name+"_"+i);
+
+      menu.className=i==cursel?"hover":"";
+
+      con.style.display=i==cursel?"block":"none";
+
+    }
+
+  }
+
+  //tab js end
+
+
+
+
+
+
+
+
+
+
+
+  //part f bottom turn_tab js begin
+
+  $(function(){
+
+
+
+    var width = 1200; //跟外面盒子的宽度一样，或者写成 var width = $(".content").width();
+
+    var ulNum = $(".part_f_bottom_content ul").length; //获取ul的个数
+
+    var contentWidth = width * ulNum; //获取整个box应该的长度，刚开始box设置成了1100，但是应该把所有的ul防到一行里面去，这样box向左移动的时候才是无缝滚动
+
+
+
+    $(".box").width(contentWidth); //给box设置宽度  .width() 是获取宽度  .width(value)是设置宽度
+
+
+
+    $(".nav span").click(function(){
+
+
+
+      $(this).addClass('active').siblings().removeClass('active');
+
+
+
+      var clickNum = $(this).index(); //判断点击的是第几个span .index()方法返回第几个，从0开始算起
+
+      //alert(clickNum);
+
+
+
+      var moveLeft = clickNum * width * -1; //应该向左移动的距离
+
+
+
+      $(".box").animate({'left':moveLeft}, 600);
+
+    })
+
+
+
+  });
+
+  //part f bottom turn_tab js end
+
+
+
+  $(document).ready(function () {
+
+    $('.flexslider').flexslider({
+
+      animation: 'fade',
+
+      controlsContainer: '.flexslider'
+
+    });
+
+  });
+
+
+
+
+
+
+
+  //part i turn_tab js begin
+
+  $(".part_i").slide({
+
+    titCell:".hd ul",
+
+    mainCell:".bd ul",
+
+    autoPage:true,
+
+    effect:"left",
+
+    autoPlay:true,
+
+    scroll:4,
+
+    vis:4,
+
+    delayTime:1000
+
+  });
+
+  //part i turn_tab js end
+
+
+
+
+
+
+
+  $(".fullSlide").hover(function(){
+
+        $(this).find(".prev,.next").stop(true, true).fadeTo("show", 0.5)
+
+      },
+
+      function(){
+
+        $(this).find(".prev,.next").fadeOut()
+
+      });
+
+  $(".fullSlide").slide({
+
+    titCell: ".hd ul",
+
+    mainCell: ".bd ul",
+
+    effect: "fold",
+
+    autoPlay: true,
+
+    autoPage: true,
+
+    trigger: "click",
+
+    startFun: function(i) {
+
+      var curLi = jQuery(".fullSlide .bd li").eq(i);
+
+      if ( !! curLi.attr("_src")) {
+
+        curLi.css("background-image", curLi.attr("_src")).removeAttr("_src")
+
+      }
+
+    }
+
+  });
+
+
+
+  $(function() {
+
+
+
+    var $c = $('#carousel'),
+
+        $w = $(window);
+
+
+
+    $c.carouFredSel({
+
+      align: false,
+
+      items: 4,
+
+      scroll: {
+
+        items: 1,
+
+        duration: 5000,
+
+        timeoutDuration: 0,
+
+        easing: 'linear',
+
+        pauseOnHover: 'immediate'
+
+      }
+
+    });
+
+
+
+
+
+    $w.bind('resize.example', function() {
+
+      var nw = $w.width();
+
+      if (nw < 990) {
+
+        nw = 990;
+
+      }
+
+
+
+      $c.width(nw * 3);
+
+      $c.parent().width(nw);
+
+
+
+    }).trigger('resize.example');
+
+
+
+  });
+
+</script>
+
+
+
+</body>
+
+</html>

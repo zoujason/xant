@@ -1,0 +1,40 @@
+<%#title : 啊啊啊啊啊啊 %>
+<style>
+  .map_list .map_level_1 a{
+    color: #EA5A1B;
+    line-height: 76px;
+    text-decoration: none;
+  }
+  .map_list ul{
+    overflow: hidden;
+    _zoom: 1;
+  }
+  .map_list .map_level_2{
+    float: left;
+    margin-right: 2em;
+  }
+  .map_list .map_level_2:first-child{
+    padding-left: 20px;
+  }
+  .map_list .map_level_2 a{
+    text-decoration: none;
+    color:#000000;
+  }
+  .map_list li a:hover{
+    color:#6483BF;
+  }
+</style>
+<div class="content">
+  <div class="breadcrumbs">
+    <span class="prev_tit">首页</span><span class="prev_navrow">>></span><span class="current_tit"><%= @page.attr('parent.title') %></span>
+  </div>
+  <div class="bordered_block">
+    <div class="article_tit1">
+      <h3>网站地图</h3>
+      <div class="sub_tit"></div>
+    </div>
+    <div class="map_list">
+      <%= hlp_site_map(@site)  %>
+    </div>
+  </div>
+</div>

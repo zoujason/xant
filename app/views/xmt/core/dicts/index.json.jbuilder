@@ -1,0 +1,1 @@
+json.array! @mgr_dicts, partial: 'mgr_dicts/mgr_dict', as: :mgr_dict

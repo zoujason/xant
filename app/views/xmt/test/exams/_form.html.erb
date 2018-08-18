@@ -1,0 +1,94 @@
+<div class="panel-body">
+  <%= form_for(@exam, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @exam if @exam.errors.any? %>
+      <div class="col-sm-12">
+        <!-- start: TEXT FIELDS PANEL -->
+        <div class="panel-body">
+          <div class="form-group">
+            <%= f.label(:title, "标题：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_field(:title,class: "form-control",placeholder:"标题",required:"required") %>
+            </div>
+          </div>
+          <div class="form-group" >
+            <%= f.label(:category_id, "所属分类：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.select :category_id,options_for_select(all_category_options,@exam.category),{},class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label(:mode, "题目类型：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.select :mode, [["请选择",nil]]+Xmt::Core::Dict.dicts_options("exam_mode"),{},class: "form-control" %>
+            </div>
+          </div>
+
+          <div id="rule_content">
+            <% if (!@exam.new_record?)%>
+                <div class="form-group" >
+                  <label class="col-sm-2 control-label"  style="text-align: right;line-height: 32px">设置随机规则规则：</label>
+
+                  <div class='col-sm-10 row'>
+                    <% @exam.type_rules.each do |rule| %>
+                    <div class='col-sm-10 questionsSet'>
+                      <%= select_tag "xmt_test_exam[type_rules][][question_type]", options_from_collection_for_select(Xmt::Core::Dict.dicts(:question_typ), :sign, :title, rule.question_type),class:"form-control"  %>
+
+                      <input name='xmt_test_exam[type_rules][][question_size]' class="form-control" placeholder='数量'   required='required' value="<%= rule.question_size %>" />
+                      <input name='xmt_test_exam[type_rules][][score]'  placeholder='每题分值' required='required' class="form-control" value="<%= rule.score  %>"/>
+
+                    </div>
+                    <% end %>
+                    <a class="btn btn-primary add-row" href="javascript:void(0)" onclick="plus($(this))">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </div>
+                </div>
+            <% else %>
+                <div class="form-group" >
+                  <label class="col-sm-2 control-label"  style="text-align: right;line-height: 32px">设置随机规则规则：</label>
+
+                  <div class='col-sm-10 row'>
+                    <div class='col-sm-10 questionsSet'>
+                      <select name="xmt_test_exam[type_rules][][question_type]" class="form-control">
+                        <% Dict.dicts("question_typ").each do |question_typ|%>
+                            <option value="<%= question_typ.sign  %>"><%= question_typ.title %></option>
+                        <% end %>
+                      </select>
+                      <input name='xmt_test_exam[type_rules][][question_size]' class="form-control" placeholder='数量'   required='required' />
+                      <input name='xmt_test_exam[type_rules][][score]'  placeholder='每题分值' required='required' class="form-control" />
+
+                    </div>
+                    <a class="btn btn-primary add-row" href="javascript:void(0)" onclick="plus($(this))">
+                      <i class="fa fa-plus"></i>
+                    </a>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= f.label(:start_at, "开始时间：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.datetime_local_field :start_at,min: Date.today %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label(:end_at, "结束时间：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.datetime_local_field :end_at,min: Date.today %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+        <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_test_exams_path %>">
+          <i class="fa fa-reply"></i>
+        </a></div>
+      </div>
+  <% end %>
+</div>
+
+<%= javascript_include_tag 'admin/questions', 'data-turbolinks-track': 'reload' %>

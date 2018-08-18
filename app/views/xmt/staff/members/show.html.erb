@@ -1,0 +1,94 @@
+<div class="page-header">
+  <h1>查看会员<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left"><strong>登录名：</strong></td>
+        <td class="column-right">
+          <%= @member.username %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>真实姓名：</strong></td>
+        <td class="column-right">
+          <%= @member.name %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>性别：</strong></td>
+        <td class="column-right">
+          <%= Xmt::Core::Dict.title(@member.gender, :gender_type) %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>电话：</strong></td>
+        <td class="column-right">
+          <%= @member.tel %>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="column-left"><strong>电子邮件：</strong></td>
+        <td class="column-right">
+          <%= @member.email %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>爱好：</strong></td>
+        <td class="column-right">
+          <% Xmt::Core::Dict.dicts(:hobbies_type).each do |dict|%>
+              <%= dict.title  if @member.hobbies && @member.hobbies.include?(dict.sign) %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>关于：</strong></td>
+        <td class="column-right">
+          <%= @member.about %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>所属站点：</strong></td>
+        <td class="column-right">
+          <%= @member.site.name%>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left"><strong>所属角色：</strong></td>
+        <td class="column-right">
+          <%= @member.roles.map(&:name).join('|')%>
+        </td>
+
+      </tr>
+      <tr>
+        <td class="column-left"><strong>所属用户组：</strong></td>
+        <td class="column-right">
+          <%= @member.groups.map(&:name).join('|')%>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+
+      <a class="btn btn-teal" href="<%= edit_xmt_staff_member_path(@member)%>">
+        <i class="fa fa-edit"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= xmt_staff_members_path%>">
+        <i class="fa fa-reply"></i>
+      </a>
+      <a class="btn btn-teal" href="<%= edit_xmt_staff_member_path(@member, pass_edit: 1) %>">
+        修改密码</a>
+    </div>
+  </div>
+
+</div>

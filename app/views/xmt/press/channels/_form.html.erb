@@ -1,0 +1,161 @@
+<div class="panel-body">
+  <%= form_for(@channel, html: {multipart: true, class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @channel if @channel.errors.any? %>
+      <input type="hidden" name="site_id" value="<%= @site.id %>">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+              <li class="active">
+                <a href="#panel_tab2_example1" data-toggle="tab">
+                  <i class="clip-home-2"></i>基本信息
+                </a>
+              </li>
+              <li>
+                <a href="#panel_tab2_example2" data-toggle="tab">
+                  高级选项
+                </a>
+              </li>
+              <li>
+                <a href="#panel_tab2_example3" data-toggle="tab">
+                   栏目关联
+                </a>
+              </li>
+              <li>
+                <a href="#panel_tab2_example4" data-toggle="tab">
+                  关联自定义表单属性
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane in active" id="panel_tab2_example1">
+                <div class="form-group">
+                  <%= f.label(:title, "频道标题：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:title, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:subtitle, "频道副标题：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:subtitle, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:site,"所属频道：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.select(:parent_id, ChannelMap.new(@site).nested_set_options(),{}, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:navigable, "导航显示：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <div class="checkbox">
+                      <label>
+                        <%= f.check_box(:navigable, { class: 'grey'}, "true", "false")%>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:linkpage, "外部链接：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:linkpage, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:layout, "频道布局：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:layout, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:tpl, "频道模板：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:tpl, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:content_tpl, "内容模板：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:content_tpl, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:seq, "频道排序：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.number_field(:seq) %>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="panel_tab2_example2">
+                <div class="form-group">
+                  <%= f.label(:seo_title, "SEO标题：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:seo_title, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:seo_keywords, "SEO关键字：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:seo_keywords, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:seo_description, "SEO描述：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_area(:seo_description, class: "form-control")%>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:avatar,"缩略图：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= image_tag( @channel.avatar.url(:thumb), width: 50, height: 50) unless @channel.avatar.blank? %>
+                    <%= f.file_field(:avatar, class: "file") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:cont, "内容：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.kindeditor :cont, owner: @channel, class: 'form-control'%>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="panel_tab2_example3">
+                <div class="form-group">
+                  <%= f.label(:relationchannel_ids,"关联频道：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.select(:relationchannel_ids, ChannelMap.new(@site).nested_set_options(),{}, class: "form-control",multiple:"multiple") %>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="panel_tab2_example4">
+                <div class="form-group">
+                  <%= f.label(:rdf_type_id, "关联自定义表单属性：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-2">
+                    <%# if @channel.new_record? %>
+                    <%= f.collection_select :page_type_id, Xmt::Press::PageType.all, :id, :title, {include_blank: '请选择'}, class: "form-control"%>
+                     <%# else %>
+                        <!--<div class="form-control"><%# =@channel.page_type.try(:title)%></div>-->
+                    <%# end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+          <div class="col-sm-1">  <a class="btn btn-primary" href="<%= xmt_press_channels_path(site_id: @site.id)%>">
+            <i class="fa fa-reply"></i> </a></div>
+        </div>
+      </div>
+  <% end %>
+</div>
+<!-- start: PAGE CONTENT -->
+
+
+
+
+

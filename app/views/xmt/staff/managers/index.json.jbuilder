@@ -1,0 +1,1 @@
+json.array! @mgr_managers, partial: 'mgr_managers/mgr_manager', as: :mgr_manager

@@ -1,0 +1,13 @@
+zh-CN:
+  mongoid:
+    models:
+      page: '内容'
+      article: '文章'
+
+
+    attributes:
+      article:
+        title: '标题'
+        subtitle: '副标题'
+        slug: '标识'
+        cont: '内容'

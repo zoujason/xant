@@ -1,0 +1,1 @@
+json.partial! "mgr_member_tpls/mgr_member_tpl", mgr_member_tpl: @mgr_member_tpl

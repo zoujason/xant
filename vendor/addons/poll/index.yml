@@ -1,0 +1,7 @@
+---
+name: poll
+path: "/poll"
+sign: poll
+version: '1.0'
+date: '2016-11-14'
+isinstall: '1'

@@ -1,0 +1,1 @@
+json.array! @mgr_groups, partial: 'mgr_groups/mgr_group', as: :mgr_group

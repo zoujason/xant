@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h1>专题导入<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<ul id="myTab" class="nav nav-tabs tab-bricky xmt-tab">
+  <ul id="myTab" class="nav nav-tabs tab-bricky">
+    <% @sites.each do |site| %>
+        <li class="<%= site.id == @site.id ? 'active' : '' %>">
+          <%= link_to site.name, upload_template_xmt_press_topics_path(site_id: site.id) %>
+        </li>
+    <% end %>
+  </ul>
+</ul>
+<div class="form-group">
+  <div class="col-sm-9">
+    <br/>
+    导入须知：<br/><br/>
+    1.专题压缩包制作：请下载专题上传须知说明：<a href="/zhuanti.zip">专题上传须知说明</a><br/><br/>
+    2.选择要上传的站点<br/><br/>
+    3.选择已做成的专题的ZIP压缩包<br/><br/>
+
+  </div>
+</div>
+<%= form_tag( wirte_template_xmt_press_topics_path(site_id: @site.id), "class":"center", "multipart": true)  do %>
+    <div class="col-sm-12">
+      <div class="tabbable">
+        <div class="tab-content">
+          <div class="tab-pane in active" id="panel_tab2_example1">
+            <div class="form-group">
+              <div class="col-sm-9">
+                <input type="file" name="file"  required/>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <input type="submit" name="commit" value="确认导入" class="btn btn-blue next-step btn-block" data-disable-with="确认导入">
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+
+
+
+

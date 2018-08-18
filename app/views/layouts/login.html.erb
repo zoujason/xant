@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XmtPress</title>
+  <%= csrf_meta_tags %>
+  <meta charset="utf-8" /><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta content="Responsive Admin Template build with Twitter Bootstrap and jQuery" name="description" />
+  <meta content="ClipTheme" name="author" />
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body  class="login example1">
+<%= yield %>
+</body>
+<%= javascript_include_tag  'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+<script>
+  jQuery(document).ready(function() {
+    Main.init();
+    Login.init();
+  });
+</script>
+</html>

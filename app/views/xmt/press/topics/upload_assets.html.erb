@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h1>资源导入<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<ul id="myTab" class="nav nav-tabs tab-bricky xmt-tab">
+  <ul id="myTab" class="nav nav-tabs tab-bricky">
+    <% @sites.each do |site| %>
+        <li class="<%= site.id == @site.id ? 'active' : '' %>">
+          <%= link_to site.name, upload_assets_xmt_press_topics_path(site_id: site.id) %>
+        </li>
+    <% end %>
+  </ul>
+</ul>
+<div class="form-group">
+  <div class="col-sm-9">
+    导入须知：<br/>
+    1.文件为ZIP的压缩包,以你专题的英文字母或者比较好识别的英文字母来压缩资源<br/>
+    2.压缩包包含三部分： 图片文件夹（images）、脚本文件夹（javascripts）、样式文件夹（stylesheets）；<br/>
+    3.导入成功后,会自动解压到对应的目录中；<br/>
+  </div>
+</div>
+<%= form_tag('/xmt/press/topics/wirte_assets' , "class":"center", "multipart": true)  do %>
+    <div class="col-sm-12">
+      <div class="tabbable">
+        <div class="tab-content">
+          <div class="tab-pane in active" id="panel_tab2_example1">
+            <div class="form-group">
+              <div class="col-sm-9">
+                <input type="file" name="file"  required/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <!-- start: TEXT FIELDS PANEL -->
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-2">
+            <input type="submit" name="commit" value="确认导入" class="btn btn-blue next-step btn-block" data-disable-with="确认导入">
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>
+
+
+
+

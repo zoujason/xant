@@ -1,0 +1,1 @@
+json.partial! "notifications/announcement", announcement: @announcement

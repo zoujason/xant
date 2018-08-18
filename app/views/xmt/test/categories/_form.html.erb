@@ -1,0 +1,37 @@
+<div class="panel-body">
+  <%= form_for(@category, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @category if @category.errors.any? %>
+      <div class="col-sm-12">
+        <!-- start: TEXT FIELDS PANEL -->
+        <div class="panel-body">
+          <div class="form-group">
+            <%= f.label(:title, "分类名称：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.text_field(:title,class: "form-control",placeholder:"分类名称",required:"required") %>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <%= f.label(:site,"所属分类：",class: "col-sm-2 control-label")%>
+            <div class="col-sm-9">
+              <%= f.select(:parent_id,[['无',nil]]+all_category_options, {}, class: "form-control") %>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+        <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_test_categories_path %>">
+          <i class="fa fa-reply"></i>
+        </a></div>
+      </div>
+  <% end %>
+</div>
+
+
+
+
+

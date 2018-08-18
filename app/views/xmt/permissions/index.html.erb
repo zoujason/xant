@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="tabbable">
+      <ul id="myTab" class="nav nav-tabs tab-bricky">
+        <li >
+          <a href="#panel_tab2_example1" data-toggle="tab">
+            <i class="clip-home-2"></i> 站点访问
+          </a>
+        </li>
+        <li>
+          <a href="#panel_tab2_example2" data-toggle="tab">
+            栏目访问 <span class="badge badge-danger">4</span>
+          </a>
+        </li>
+        <li class="active dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            菜单访问 &nbsp; <i class="fa fa-caret-down width-auto"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-info">
+            <% @roles.each do |role|%>
+                <li>
+                  <a href="<%= mgr_permissions_path %>" data-toggle="tab">
+                    <%= role.name %>
+                  </a>
+                </li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane in active" id="panel_tab2_example1">
+
+          <%= @menu_table %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

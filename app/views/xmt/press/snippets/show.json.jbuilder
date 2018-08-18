@@ -1,0 +1,1 @@
+json.partial! "mgr_snippets/mgr_snippet", snippet: @snippet

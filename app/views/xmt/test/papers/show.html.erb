@@ -1,0 +1,42 @@
+<h1 class="text-center"><%= @paper.try(:title) || @paper.parent.try(:title) %></h1>
+<div class="content col-md-8 col-md-offset-3">
+  <% unless (single=@paper.question_ids.select{|question| Xmt::Test::Question.find(question).instance_of?(Xmt::Test::SingleChoice)}).blank? %>
+  <div id="radio">
+    <h2>单选题(共计<%= single.length  %>题)</h2>
+
+    <ol>
+      <% single.each do |question_id|%>
+          <li><%= raw question_format(question_id,'radio')  %></li>
+      <% end %>
+    </ol>
+  </div>
+  <% end %>
+  <% unless (multi=@paper.questions.select{|question|  Xmt::Test::Question.find(question).instance_of?(Xmt::Test::MultipleChoice)}).blank? %>
+  <div id="multiple">
+    <h2>多选题(共计<%=  multi.length  %>题)</h2>
+    <ol>
+      <%  multi.each do |question_id|%>
+          <li><%= raw question_format(question_id,'multiple')  %></li>
+      <% end %>
+    </ol>
+  </div>
+  <% end %>
+  <% unless (binary=@paper.questions.select{|question|  Xmt::Test::Question.find(question).instance_of?(Xmt::Test::BinaryChoice)}).blank? %>
+      <div id="binary">
+        <h2>判断题(共计<%=  binary.length  %>题)</h2>
+        <ol>
+          <%  binary.each do |question_id|%>
+              <li><%= raw question_format(question_id,'radio')  %></li>
+          <% end %>
+        </ol>
+      </div>
+  <% end %>
+
+  <div class="row text-right">
+    <a class="btn btn-primary " href="<%= xmt_test_exams_path() %>">
+      返回
+    </a>
+  </div>
+</div>
+
+

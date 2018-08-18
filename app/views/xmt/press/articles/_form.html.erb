@@ -1,0 +1,223 @@
+
+<div class="panel-body">
+  <%= form_for(@article, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @article if @article.errors.any? %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="tabbable">
+        <ul id="myTab" class="nav nav-tabs tab-bricky">
+          <li class="active">
+            <a href="#panel_tab2_example1" data-toggle="tab">
+              <i class="clip-home-2"></i>基本信息
+            </a>
+          </li>
+          <li>
+            <a href="#panel_tab2_example2" data-toggle="tab">
+             高级选项
+            </a>
+          </li>
+
+          <li>
+            <a href="#panel_tab2_example3" data-toggle="tab">
+              自定义选项
+            </a>
+          </li>
+
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane in active" id="panel_tab2_example1">
+           <div class="form-group">
+             <%= f.hidden_field :id,{id:"aId"}  %>
+              <%= f.label(:title,"文章标题：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:title, class: "form-control",required:"required") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:subtitle, "副标题：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:subtitle, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:channel,"所属频道：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.select(:parent_id, options_for_select(ChannelMap.new(@site).nested_set_options(),@article.parent_id || @channel.try(:id)),{}, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:linkpage, "外部链接：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:linkpage, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:seo_keywords, "关键字：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:seo_keywords, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:desc, "描述：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_area(:desc, class: "form-control")%>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:avatar,"缩略图：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= image_tag( @article.avatar.url, width: 50, height: 50 ,id:"Avatar") unless @article.avatar.blank? %>
+                <a href="javascript:void(0)" id="DeleteAvatar"><i class="fa fa-trash fa-w-18"></i></a>
+                <%= f.file_field(:avatar, class: "file") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:cont,"文章内容：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%#= f.cktext_area :cont, class: 'form-control'%>
+                <%= f.kindeditor :cont, owner: @article, window_onload: true, class: 'form-control'%>
+              </div>
+            </div>
+            <div class="form-group" id="PictureGroup">
+              <%= f.label(:pictures,"图片集：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9" >
+                <% @article.pictures.each do |pic| %>
+                    <div class="pictures">
+                      <% if !pic.pic.url.blank? %>
+                        <%= image_tag( pic.pic.url, width: 50, height: 50,class:"pictures" ) %>
+                      <% end %>
+                      <a href="javascript:void(0)" class="deletePic" id="<%= pic.id %>"><i class="fa fa-trash fa-w-18"></i></a>
+                    </div>
+                <% end %>
+                <% unless @article.pictures.blank? %>
+                    <div id="AddPicture">
+                      <i class="fa fa-cloud-upload">
+                        <input type="file" name="add_picture" class="add_picture_file" id="AddPictureFile" onchange="showPic()">
+                      </i>
+                    </div>
+                <% end %>
+                <%= f.file_field(:pictures, class: "file", multiple: true) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:dept_id,"所属部门：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.select(:dept_id,  Xmt::Staff::DeptApplication.all.collect { |c| [ c.ancestors_and_self_name_format, c.id ] },{}, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:author, "作者：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:author, class: "form-control") %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <%= f.label(:source, "来源：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:source, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:published_at, "发布日期：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.datetime_field("published_at") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:seq, "排序：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.number_field(:seq) %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:status,"状态：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.collection_select(:status, option_status(),:sign, :title, {}, class: "form-control") %>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="panel_tab2_example2">
+
+            <div class="form-group">
+              <%= f.label(:tpl, "模板：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.text_field(:tpl, class: "form-control") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:rcmd_level, "推荐：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-2">
+                <%= f.collection_select :rcmd_level, Xmt::Core::Dict.dicts(:article_rcmds), :sign, :title, {include_blank:"请选择"}, class: "form-control" %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.label(:headline_level, "头条：", class: "col-sm-2 control-label")%>
+              <div class="col-sm-2">
+                <%= f.collection_select :headline_level, Xmt::Core::Dict.dicts(:article_headlines), :sign, :title, {include_blank:"请选择"}, class: "form-control" %>
+              </div>
+            </div>
+            <div class="tab-pane">
+              <div class="form-group">
+                <%= f.label(:relationchannel_ids,"关联频道：",class: "col-sm-2 control-label")%>
+                <div class="col-sm-9">
+                  <%= f.select(:relationchannel_ids, ChannelMap.new(@site).nested_set_options(),{}, class: "form-control",style:"height:180px;",multiple:"multiple") %>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <%= f.label(:comment_options, "相关内容：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+              <label  id="modal_ajax_demo_btn" class="lable btn btn-blue">点击添加</label>
+              </div>
+
+            </div>
+            <script type="text/javascript">
+                $("#modal_ajax_demo_btn").newWindow({
+                  windowTitle:"相关内容",
+                  content: "<iframe   style='width:810px;height:600px;border:0' src='/xmt/press/articles/lookup?channel_id=<%=@channel.id%>'>",
+                  windowType: "iframe",
+                  width:810,height:600
+                });
+            </script>
+            <div class="form-group">
+              <div  id="relationtolist" class="col-sm-9" style="align-content: center; padding-left: 280px">
+                <% @article.relationships.each do |re| %>
+                  <div ><input type='checkbox' name='article[relationship_ids][]' checked value='<%= re.id%>'> <%= re.title%></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="panel_tab2_example3">
+            <% @channel.page_type.page_attrs.each do |page_attr| %>
+              <div class="form-group">
+                <%= f.label(:headline_level, "#{page_attr.title}：", class: "col-sm-2 control-label")%>
+                <div class="col-sm-9">
+                  <%= Xmt::Form::FormField.new(page_attr,"xmt_press_article[cust_attr][#{page_attr.sign}]",@article.cust_attr.blank? ? nil : @article.cust_attr["#{page_attr.sign}"],"form-control").create%>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4" id="add-input"></div>
+      <div class="col-sm-2" id="vive-submit">
+        <input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交">
+      </div>
+     <div class="col-sm-1">
+        <a title="返回" class="btn btn-primary" href="<%= xmt_press_articles_path(site_id: @site.id,channel_id:@channel.id)%>">
+          <i class="fa fa-reply"></i> </a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= javascript_include_tag 'admin/deletePicture.js', 'data-turbolinks-track': 'reload' %>
+
+
+
+

@@ -1,0 +1,9 @@
+<div class="page-header">
+  <h1>图片管理<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<ul>
+  <% @images.each do |img|%>
+  <li><img src="<%= img.url%>" /></li>
+  <% end %>
+</ul>

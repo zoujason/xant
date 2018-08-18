@@ -1,0 +1,242 @@
+<%= form_for(@poll, html: {class: "form-horizontal" , onkeydown:"if(event.keyCode==13){return false;}" ,onsubmit: "return checkForm()"}) do |f| %>
+    <% if @poll.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
+          <ul>
+            <% @poll.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :site_id, value: @site.id %>
+    <style>
+      .question{font-size: 14px;margin: 5px;}
+      .answer{margin: 5px;}
+      .q-add{margin: 5px;padding:5px;color:white;background: #0f74a8;}
+      .q-del{margin: 5px;padding:5px;color:white;background: #f06e57;}
+      .a-del{margin: 5px;padding:5px;color:white;background: #f06e57;}
+      .question input{margin:2px}
+    </style>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <!-- start: TEXT FIELDS PANEL -->
+          <div class="panel-body">
+            <div class="form-group">
+              <%= f.label(:site, "所属站点：",class: "col-sm-2 control-label")%>
+              <div class="col-sm-9">
+                <%= f.collection_select :site_id, [@site], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-field-4">
+                标题：<span class="symbol required"></span>
+              </label>
+              <div class="col-sm-9">
+                <%= f.text_field(:title, class: "form-control",placeholder:"title",required:"required") %>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="form-field-4">
+                描述：<span class="symbol required"></span>
+              </label>
+              <div class="col-sm-9">
+                <%= f.text_area(:desc, class: "form-control",placeholder:"desc")%>
+              </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-field-4">
+            开始时间：<span class="symbol required"></span>
+            </label>
+            <div class="col-sm-9">
+            <%= f.datetime_field("start_at", min:Date.today) %>
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-field-4">
+            结束时间：<span class="symbol required"></span>
+            </label>
+            <div class="col-sm-9">
+            <%= f.datetime_field("end_at", min:Date.today) %>
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-field-4">
+            次数限制：<span class="symbol required"></span>
+            </label>
+            <div class="col-sm-9">
+            <%= f.text_field(:interval_hour, class: "form-control",placeholder:"interval_hour") %>
+            </div>
+            </div>
+            <div class="form-group">
+            <label class="col-sm-2 control-label" for="form-field-4">
+            状态：<span class="symbol required"></span>
+            </label>
+            <div class="col-sm-9">
+            <%= f.text_field(:status, class: "form-control",placeholder:"status") %>
+            </div>
+            </div>
+            <div class="poll col-sm-12">
+              <ul>
+                <% @poll.questions.each_with_index  do |q,i| %>
+                    <li class="question">
+                      <input type="hidden" name="questions[][id]" value="<%= q.id %>">
+                      <%= i + 1 %>:<input type="text" name="questions[][title]" value="<%= q.title %>">
+                      <!-- <input type="number" name="questions[][qty]" value="<%#= q.qty %>">-->
+                      <% if q.sel_status == true %>
+                          是否为多选：<select name="questions[][sel_status]" required><option value="">请选择</option><option value="false">否</option><option value="true" selected>是</option></select>
+                      <% elsif q.sel_status == false %>
+                          是否为多选：<select name="questions[][sel_status]" required><option value="">请选择</option><option value="false" selected>否</option><option value="true">是</option></select>
+                      <% end %>
+                      <ul>
+                        <% q.answers.each do |item| %>
+                            <li class="answer">
+                              <input type="text" name="questions[][answers][][title]" value="<%= item.title %>">
+                              <!--<input type="number" name="questions[][answers][][qty]" value="<%#= item.qty %>">-->
+                            </li>
+                        <% end %>
+                      </ul>
+                    </li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-2"><input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交"></div>
+              <div class="col-sm-1"><a class="btn btn-primary" href="<%= xmt_faq_polls_url%>">
+                <i class="fa fa-reply"></i> </a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+        (function(){
+
+            var Answer = function(options){
+                this.applyTo = options['applyTo'];
+                this.renderTo = options['renderTo'];
+                this.el = $(this.applyTo);
+                if (this.applyTo != null) {
+                    this.load();
+                }else{
+                    this.build();
+                };
+            };
+
+            Answer.prototype = {
+                load: function(){
+                    this.el.append(this.btnDelAnswer());
+                },
+                build: function(){
+                    //var item = $('<li class="answer"><input type="text" name="questions[][answers][][title]"><input type="number" name="questions[][answers][][qty]"></li>');
+                    var item = $('<li class="answer"><input type="text" name="questions[][answers][][title]"></li>');
+                    item.append(this.btnDelAnswer());
+                    $(this.renderTo).append(item);
+                },
+                btnDelAnswer: function () {
+                    return $('<a class="a-del" href="#">删除</a>').on('click', function (e) {
+                        e.preventDefault();
+                        $(this).parent('li').remove();
+                    });
+                }
+            };
+
+            var Question = function (options) {
+                this.applyTo = options['applyTo'];
+                this.renderTo = options['renderTo'];
+                this.el = $(this.applyTo);
+
+                if (this.applyTo != null) {
+                    this.load();
+                }else{
+                    this.build();
+                };
+            };
+
+            Question.prototype = {
+                load: function(){
+                    var qbox = this.el.children('ul');
+                    qbox.before(this.btnAddAnswer());
+                    qbox.before(this.btnDelQuestion());
+                    qbox.children('li.answer').each(function () {
+                        new Answer({applyTo: this});
+                    });
+                },
+
+                build: function(){
+                    //var question = $('<li class="question"><input type="text" name="questions[][title]"><input type="number" name="questions[][qty]"></li>');
+                    var question = $('<li class="question"><input type="text" name="questions[][title]">是否为多选：<select name="questions[][sel_status]" ><option value="">请选择</option><option value="false">否</option><option value="true">是</option></select></li>');
+                    question.append(this.btnAddAnswer());
+                    question.append(this.btnDelQuestion());
+                    $(this.renderTo).append(question);
+                },
+
+                btnAddAnswer: function () {
+                    var me = this;
+                    return $('<a class="q-add" href="#">添加选项</a>').on('click', function (e) {
+                        e.preventDefault();
+                        if($(this).parents("li:first").children('ul').length == 0) {
+                            $(this).parent("li").append('<ul></ul>');
+                        }
+                        var renderTo = $(this).parents("li:first").children('ul');
+                        new Answer({renderTo: renderTo});
+                    });
+                },
+
+                btnDelQuestion: function () {
+                    var me = this;
+                    return $('<a class="q-del" href="#">删除</a>').on('click', function (e) {
+                        e.preventDefault();
+                        if($(this).siblings("input[name$='questions[][id]']").length == 0){
+                            $(this).parent('li').remove();
+                        }else{
+                            $(this).parent('li').hide();
+                            $(this).parent().append('<input type="hidden" name="questions[][status]" value="false">');
+                        }
+                    });
+                }
+
+            };
+
+            var Poll = function (options) {
+                this.applyTo = options['applyTo'];
+                this.el = $(this.applyTo);
+                if (this.el) {
+                    this.load();
+                };
+            };
+
+            Poll.prototype = {
+                load: function () {
+                    this.el.prepend(this.btnAddQuestionBuild());
+                    this.el.children().children('li.question').each(function () {
+                        new Question({applyTo: this});
+                    });
+                },
+                btnAddQuestionBuild: function () {
+                    var me = this;
+                    return $('<a class="btn btn-primary" href="#">添加问题</a>').on('click', function (e) {
+                        e.preventDefault();
+                        new Question({renderTo: me.el.children('ul')});
+                    });
+                }
+            };
+
+            window.Poll = Poll;
+        })();
+
+        new Poll({applyTo:'.poll'});
+
+        function checkForm(){
+            var len = $(".question").length;
+            if(len == 0){
+                alert("请添加问题");
+                window.location.reload();
+                return false;
+            }
+        }
+    </script>
+<% end %>

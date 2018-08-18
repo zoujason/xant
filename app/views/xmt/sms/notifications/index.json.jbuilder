@@ -1,0 +1,1 @@
+json.array! @announcements, partial: 'notifications/announcement', as: :announcement

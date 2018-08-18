@@ -1,0 +1,60 @@
+
+<div class="panel-body">
+  <%= form_for(@sensitive, html: {class: "form-horizontal", onkeydown:"if(event.keyCode==13){return false;}"  }) do |f| %>
+      <%= render 'shares/errors', obj: @sensitive if @sensitive.errors.any? %>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tabbable">
+            <ul id="myTab" class="nav nav-tabs tab-bricky">
+              <li class="active">
+                <a href="#panel_tab2_example1" data-toggle="tab">
+                  <i class="clip-home-2"></i>敏感信息
+                </a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane in active" id="panel_tab2_example1">
+                <div class="form-group">
+                  <%= f.hidden_field :id %>
+                  <%= f.label(:title,"敏感词语：", class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:title, class: "form-control",required:"required") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:substitution, "替换词语：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <%= f.text_field(:substitution, class: "form-control") %>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label(:enable, "是否启用：",class: "col-sm-2 control-label")%>
+                  <div class="col-sm-9">
+                    <div class="checkbox">
+                      <label>
+                        <%= f.check_box(:enable, { class: 'grey'}, "true", "false")%>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4" id="add-input"></div>
+          <div class="col-sm-2" id="vive-submit">
+            <input type="submit" name="commit" value="确认提交" class="btn btn-blue next-step btn-block" data-disable-with="确认提交">
+          </div>
+          <div class="col-sm-1">
+            <a title="返回" class="btn btn-primary" href="<%= xmt_press_sensitives_path%>">
+              <i class="fa fa-reply"></i> </a>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+
+

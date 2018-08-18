@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>查看字典<small></small></h1>
+</div>
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-sm-12">
+    <table id="user" class="table table-bordered table-striped" style="clear: both">
+      <tbody>
+      <tr>
+        <td class="column-left">Title：</td>
+        <td class="column-right">
+          <%= @dict.title %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">DictType：</td>
+        <td class="column-right">
+          <%= @dict.typ %>
+        </td>
+      </tr>
+      <tr>
+        <td class="column-left">Sign：</td>
+        <td class="column-right">
+          <%= @dict.sign %>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-12 space20">
+      <a class="btn btn-teal" href="<%=edit_xmt_core_dict_path(@dict) %>">
+        <i class="fa fa-edit"></i>
+      </a>
+      <a class="btn btn-primary" href="<%= xmt_core_dicts_path %>">
+        <i class="fa fa-reply"></i>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+

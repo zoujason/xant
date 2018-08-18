@@ -1,0 +1,1 @@
+json.array! @mgr_guest_books, partial: 'mgr_guest_books/mgr_guest_book', as: :mgr_guest_book

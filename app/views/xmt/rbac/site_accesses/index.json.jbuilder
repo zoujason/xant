@@ -1,0 +1,1 @@
+json.array! @mgr_site_accesses, partial: 'mgr_site_accesses/mgr_site_access', as: :mgr_site_access

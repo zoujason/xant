@@ -1,0 +1,1 @@
+json.array! @mgr_messages, partial: 'mgr_messages/mgr_message', as: :mgr_message
