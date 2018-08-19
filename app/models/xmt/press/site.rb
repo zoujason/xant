@@ -29,9 +29,9 @@ module Xmt
       #after_create :site_file
 
 
-      set_callback(:save, :before) do |doc|
-        self.party_office = CGI.escape(party_office)
-      end
+      # set_callback(:save, :before) do |doc|
+      #   self.party_office = CGI.escape(party_office)
+      # end
 
       set_callback(:save, :after) do |doc|
         #SiteMgr.instance.load()

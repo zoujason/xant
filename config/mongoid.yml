@@ -9,8 +9,8 @@ development:
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-#        - 10.10.0.95:27017
-        - localhost:27017
+#        - localhost:27017
+        - 47.98.204.73:27017
       options:
         # Change the default write concern. (default = { w: 1 })
         # write:
@@ -138,7 +138,7 @@ test:
     default:
       database: xmt_press_test
       hosts:
-        - 10.10.0.95:27017
+        - localhost:27017
       options:
         read:
           mode: :primary
@@ -149,7 +149,7 @@ production:
     default:
       database: xmt_press_production
       hosts:
-        - 10.10.0.95:27017
+        - 47.98.204.73:27017
       options:
   options:
     raise_not_found_error: false

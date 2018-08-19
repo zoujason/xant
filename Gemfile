@@ -77,7 +77,8 @@ gem 'carrierwave-mongoid', require: 'carrierwave/mongoid'
 
 #gem 'ckeditor'
 # gem 'rails_kindeditor'
-gem 'rails_kindeditor', github:  'songgz/rails_kindeditor'
+# gem 'rails_kindeditor', github:  'songgz/rails_kindeditor'
+gem 'rails_kindeditor', github:  'zoujason/rails_kindeditor'
 gem 'rucaptcha' # 验证码
 gem 'spreadsheet'
 gem 'rubyzip', '>= 1.0.0' # will load new rubyzip version

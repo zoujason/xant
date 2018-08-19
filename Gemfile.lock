@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/songgz/rails_kindeditor.git
-  revision: 15ece1761dda2dcde84a4794dbbf059c1dac8522
+  remote: git://github.com/zoujason/rails_kindeditor.git
+  revision: 4be00982c504b04d3f76ec595a92a9633f9fbe04
   specs:
-    rails_kindeditor (0.6.0)
+    rails_kindeditor (0.7.0)
       carrierwave
       mini_magick
 
