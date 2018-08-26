@@ -5,13 +5,15 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: xmt_press_development
-      # Provides the hosts the default client can connect to. Must be an array
+      database: zeta
+      # Provides the hosts the defaulext client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
 #        - localhost:27017
         - 47.98.204.73:27017
       options:
+        user: 'zeta'
+        passwrod: 'zeta1124'
         # Change the default write concern. (default = { w: 1 })
         # write:
         #   w: 1
@@ -147,10 +149,12 @@ test:
 production:
   clients:
     default:
-      database: xmt_press_production
+      database: zeta
       hosts:
         - 47.98.204.73:27017
       options:
+       user: 'zeta'
+       passwrod: 'zeta1124'
   options:
     raise_not_found_error: false
     include_root_in_json: true
