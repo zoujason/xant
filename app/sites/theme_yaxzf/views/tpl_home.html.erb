@@ -29,7 +29,7 @@
         <!--- top end --->
         <!--- bottom start --->
         <ul>
-          <% hlp_list_article('5b750c9eb3e94101acb8884c',{load_all:true,count:5,sort:'rcmd_level'}).each do |new|%>
+          <% hlp_list_article('5b82a32ed9737f4df0acd189',{load_all:true,count:5,sort:'rcmd_level'}).each do |new|%>
               <li>
                 <div class="cnrm_title"><a href="<%= new.url %>" target="_blank"><%= new.attr('title', {default:'默认标题'}) %></a></div>
                 <div class="cnrm_time"><%= image_tag(new.attr('avatar.url',{default:'bg001.png'})) %></div>

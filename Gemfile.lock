@@ -7,7 +7,7 @@ GIT
       mini_magick
 
 GEM
-  remote: http://gems.ruby-china.org/
+  remote: https://rubygems.org/
   specs:
     actioncable (5.2.0)
       actionpack (= 5.2.0)
