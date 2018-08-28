@@ -3,7 +3,7 @@ namespace :xmt do
   desc "create the site data"
   task :site_setup => :environment do |task, args|
     rdf = Xmt::Press::PageType.create title: '新闻文章'
-    edu = Xmt::Press::Site.create title: '中国依安', subtitle: '中国依安', host: '', slug: 'www', tpl: 'tpl_home', layout: 'theme_yaxzf', mobile: true, skin: 'theme_yaxzf',page_type: rdf
+    edu = Xmt::Press::Site.create title: 'ZETA形象工作室', subtitle: 'Zeta', host: '', slug: 'www', tpl: 'tpl_home', layout: 'theme_zeta', mobile: true, skin: 'theme_zeta',page_type: rdf
     ccc = Xmt::Press::Channel.create title: '走进依安', tpl: 'tpl_home_index', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c1|
       c1.channels.build title: '县长致辞', tpl: 'tpl_channel_content', content_tpl: 'tpl_content', page_type: rdf
       c1.channels.build title: '依安视频', tpl: 'tpl_channel_content', content_tpl: 'tpl_content', page_type: rdf
@@ -16,54 +16,13 @@ namespace :xmt do
       end
     end
 
-    Xmt::Press::Channel.create title: '依安新闻', tpl: 'tpl_channel_list', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c2|
-      c2.channels.build title: '依安要闻', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c2.channels.build title: '公告公示', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c2.channels.build title: '乡镇动态', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c2.channels.build title: '部门之窗', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-    end
+    # Xmt::Press::Channel.create title: '依安新闻', tpl: 'tpl_channel_list', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c2|
+    #   c2.channels.build title: '依安要闻', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
+    #   c2.channels.build title: '公告公示', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
+    #   c2.channels.build title: '乡镇动态', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
+    #   c2.channels.build title: '部门之窗', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
+    # end
 
-    Xmt::Press::Channel.create title: '政务公开', tpl: 'tpl_publish', content_tpl: 'tpl_gkml_content', parent: edu, page_type: rdf do |c3|
-      c3.channels.build title: '最新公开', tpl: 'tpl_list_zwgk', content_tpl: 'tpl_gkml_content', page_type: rdf
-      c3.channels.build title: '公开目录', tpl: 'tpl_list_gkml', content_tpl: 'tpl_content', page_type: rdf
-      c3.channels.build title: '公开制度', tpl: 'tpl_list_zwgk', content_tpl: 'tpl_content', page_type: rdf
-      c3.channels.build title: '公开指南', tpl: 'tpl_list_zwgk', content_tpl: 'tpl_content', page_type: rdf
-      c3.channels.build title: '公开年报', tpl: 'tpl_list_zwgk', content_tpl: 'tpl_content', page_type: rdf
-      c3.channels.build title: '基本公开', tpl: 'tpl_list_zwgk', content_tpl: 'tpl_content', page_type: rdf do |c35|
-        c35.channels.build title: '机构概况', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-        c35.channels.build title: '工作报告', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-        c35.channels.build title: '公示公告', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      end
-    end
-
-    Xmt::Press::Channel.create title: '政民互动', tpl: 'tpl_list', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c4|
-      c4.channels.build title: '在线访谈', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c4.channels.build title: '民意征集', tpl: 'tpl_list', content_tpl: 'tpl_myzj_content', page_type: rdf
-      c4.channels.build title: '网上调查', tpl: 'tpl_wsdc', content_tpl: 'tpl_content', page_type: rdf
-      c4.channels.build title: '网上咨询', tpl: 'tpl_list_gkml', content_tpl: 'tpl_content', page_type: rdf
-      c4.channels.build title: '领导信箱', tpl: 'tpl_list_gkml', content_tpl: 'tpl_content', page_type: rdf
-    end
-    Xmt::Press::Channel.create title: '为民办事', tpl: 'tpl_services_list', content_tpl: 'tpl_content_services', parent: edu, page_type: rdf
-    Xmt::Press::Channel.create title: '投资指南', tpl: 'tpl_channel', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c5|
-      c5.channels.build title: '招商项目', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c5.channels.build title: '产业风采', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-    end
-
-    Xmt::Press::Channel.create title: '专题报道', tpl: 'tpl_channel', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c6|
-      c6.channels.build title: '脱贫攻坚', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c6.channels.build title: '美丽乡村', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c6.channels.build title: '十九大专题', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c6.channels.build title: '双随机一公开', tpl: '	tpl_list_gk', content_tpl: 'tpl_content', page_type: rdf do |c61|
-        c61.channels.build title: '人社局', tpl: 'tpl_list_gk_content', content_tpl: 'tpl_content', page_type: rdf
-        c61.channels.build title: '市场局', tpl: 'tpl_list_gk_content', content_tpl: 'tpl_content', page_type: rdf
-      end
-    end
-    Xmt::Press::Channel.create title: '图片链接', tpl: 'tpl_channel', content_tpl: 'tpl_content', parent: edu, page_type: rdf do |c7|
-      c7.channels.build title: '第三层', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c7.channels.build title: '第二层', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c7.channels.build title: '第一层', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-      c7.channels.build title: '轮播图', tpl: 'tpl_list', content_tpl: 'tpl_content', page_type: rdf
-    end
 
 
     #单页

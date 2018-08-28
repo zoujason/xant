@@ -60,7 +60,7 @@ class SearchsController < PagesController
     @search_articles = Xmt::Press::Government.published_at.seq.recently.publishings.where(opts).page(params[:page]).per(15)
 
     @channel = Xmt::Press::Channel.find(params[:channel_id])
-    render layout: 'theme_yaxzf', template: 'tpl_search_gkml'
+    render layout: 'theme_zeta', template: 'tpl_search_gkml'
 
   end
 

@@ -29,7 +29,7 @@ class PagesController < ApplicationController
   def set_page
     @page = Xmt::Press::Page.where(id: params[:id]).first unless params[:id].blank?
     @page = SiteMgr.instance.find_or_default_by_slug(params[:slug]) unless @page
-    @site = @page.site
+    @site = Xmt::Press::Site.first
     imprint
   end
 
