@@ -71,17 +71,10 @@
 
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ">
-                <li class="active"><a href="index.html">首页</a></li>
-                <li><a href="about.html">关于我们</a></li>
-                <li><a href="services.html">服务项目</a></li>
-                <li><a href="gallery.html">作品展示</a></li>
-                <!--<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>-->
-                  <!--<ul class="dropdown-menu">-->
-                    <!--<li><a href="icons.html">Web Icons</a></li>-->
-                    <!--<li><a href="codes.html">Short Codes</a></li>-->
-                  <!--</ul>-->
-                <!--</li>-->
-                <li><a href="contact.html">联系我们</a></li>
+                <li class="active"><a href="/www">首页</a></li>
+                <% hlp_list_channel(Xmt::Press::Site.first.id).each do |c|%>
+                  <li><a href="<%= c.url%>" target="_blank"><%= c.attr(:title)%></a></li>
+                <% end %>
               </ul>
             </div>
 
