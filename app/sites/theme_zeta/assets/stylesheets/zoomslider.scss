@@ -45,6 +45,9 @@
 			width: 100%;
 			min-height:780px;
 			background-color: #999;
+		  	background-image:image_url("b3.jpg");
+		  	//background-image:image_url("b3.jpg"),url("b2.jpg"),url("b1.jpg");
+		  	//background-image:image_url("b3.jpg"),url("b2.jpg"),url("b1.jpg");
 		}
 		.demo-inner-content {
 			position: relative;
