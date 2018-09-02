@@ -689,7 +689,13 @@ p.white-clrf {
 .pricing-grid.grid-two {
     margin: 0 2em;
 }
+.pricing-grid.grid-2 {
+    margin: 0 2em;
+}
 .pricing-grid.grid-three {
+    margin: 0 2em 0 0;
+}
+.pricing-grid.grid-3 {
     margin: 0 2em 0 0;
 }
 .pricing-grid h3 {
@@ -2347,6 +2353,9 @@ h6.caption {
 .pricing-grid.grid-one,.pricing-grid.grid-two{
 	margin-bottom:2em;
 }
+.pricing-grid.grid-1,.pricing-grid.grid-2{
+    margin-bottom:2em;
+}
 .footer_grid:nth-child(2){
 	margin-bottom:2em;
 }
@@ -2880,9 +2889,15 @@ ul.nav.navbar-nav li a {
 .pricing-grid.grid-two {
     margin: 0 0em 2em;
 }
+    .pricing-grid.grid-2 {
+        margin: 0 0em 2em;
+    }
 .pricing-grid.grid-three {
     margin: 0 0em 2em 0;
 }
+    .pricing-grid.grid-3 {
+        margin: 0 0em 2em 0;
+    }
 .wthree-subscribef-w3ls h3.tittlef-agileits-w3layouts {
     font-size: 2em;
 }
