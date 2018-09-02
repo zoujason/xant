@@ -1,5 +1,6 @@
 <!-- About us -->
 <div class="about-3">
+
   <h3 class="heading-agileinfo">欢迎来到Zeta<span>提供专业的美甲美睫服务</span></h3>
   <div class="container">
     <div class="d-flex">
@@ -7,7 +8,7 @@
       <div class="about1">
         <h5> 指尖新时尚，秀出大不同。</h5>
         <p>十指芊芊，美甲做作作；美甲作作，十指千芊芊。</p>
-        <p>美丽的您需要一双美甲，美甲去哪里，就来Zeta甲人。</p>
+        <p>美丽的您需要一双美甲，美甲去哪里，就来Zeta美甲。</p>
         <a class="join-wthree" href="/pages/5b8bae2320ed4e05aa9eb31a" target="_blank">了解更多
           <i class="fa fa-hand-o-right" aria-hidden="true"></i>
         </a>
@@ -128,7 +129,7 @@
 <div class="clients">
   <div class="container">
     <div class="wthree_head_section">
-      <h3 class="heading-agileinfo">顾客推荐<span>Zeta专业美甲美睫</span></h3>
+      <h3 class="heading-agileinfo">活动专区<span>Zeta专业美甲美睫</span></h3>
     </div>
 
     <section class="slider">
@@ -136,8 +137,6 @@
         <ul class="slides">
           <% hlp_list_article('5b8bae8120ed4e05aa9eb325',{count:4}).each do |article| %>
             <li>
-              <!--<img src="images/t1.jpg" alt="" />-->
-              <%#= image_tag('t1.jpg')%>
               <%= image_tag(article.attr('avatar.url',{default:'t1.jpg'}))%>
               <p><%= article.attr(:cont,{html_safe: true}) %></p>
               <div class="client">
@@ -145,6 +144,13 @@
               </div>
             </li>
           <% end %>
+          <!--<li>-->
+            <!--<img src="images/t1.jpg" alt="" />-->
+            <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .</p>-->
+            <!--<div class="client">-->
+              <!--<h5>Gerald Roy</h5>-->
+            <!--</div>-->
+          <!--</li>-->
         </ul>
       </div>
     </section>
