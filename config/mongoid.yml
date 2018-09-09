@@ -9,8 +9,8 @@ development:
       # Provides the hosts the defaulext client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - localhost:27017
-#        - 47.98.204.73:27626
+#        - localhost:27017
+        - 47.98.204.73:27626
       options:
 #        user: 'zeta'
 #        password: 'zeta1124'

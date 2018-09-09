@@ -26,7 +26,12 @@
             <div class="form-group">
               <%= f.label(:site, "所属站点：",class: "col-sm-2 control-label")%>
               <div class="col-sm-9">
-                <%= f.collection_select :site_id, [@site], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+                <% if params[:site_id].blank? %>
+                  <%= f.collection_select :site_id, [Xmt::Press::Site.find(@poll.site.id)], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+                <% else %>
+                  <%= f.collection_select :site_id, [@site], :id, :subtitle, {}, class: "form-control", readonly: 'readonly' %>
+                <% end %>
+
               </div>
             </div>
             <div class="form-group">
