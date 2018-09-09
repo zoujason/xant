@@ -93,6 +93,7 @@
                         <% q.answers.each do |item| %>
                             <li class="answer">
                               <input type="text" name="questions[][answers][][title]" value="<%= item.title %>">
+                              <label>得票数：</label><input type="text" name="questions[][answers][][qty]" value="<%= item.qty %>票" readonly>
                               <!--<input type="number" name="questions[][answers][][qty]" value="<%#= item.qty %>">-->
                             </li>
                         <% end %>

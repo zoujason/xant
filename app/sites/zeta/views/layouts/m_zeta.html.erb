@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Zeta美甲美睫</title>
+  <!-- custom-theme -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="" />
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+  function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <%= stylesheet_link_tag 'm_zeta', media: "all", 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'm_zeta', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<%= yield %>
+<script>
+    var mySwiper  = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        loop: true,
+        onReachEnd: function(swiper){
+            $("#t2").hide();
+            $("#t3").show();
+        }
+    });
+    $("#t2,#t3").hide();
+    $("a.jion").on("click",function(){
+        $("#t1").hide();
+        $("#t2").show();
+    });
+    $(".swiper-container label,.swiper-container input").click(function(){
+        var this_active = $(this).parents(".swiper-slide").index();
+        setTimeout(function(){
+            mySwiper.slideTo(this_active+1,1000)
+        },500);
+
+    });
+    $('.swiper-button-next').click(function(){
+        if(mySwiper .isEnd){
+            $("#t2").hide();
+            $("#t3").show();
+        }
+    })
+
+</script>
+</body>
+</html>

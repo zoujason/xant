@@ -86,3 +86,4 @@ gem 'zip-zip' # will load compatibility for old rubyzip API.
 
 gem 'rake'
 
+gem 'ssl_requirement'

@@ -11,15 +11,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery-2.1.4.min.js
-//= require jquery.flexslider.js
-//= require jquery.zoomslider.min.js
-//= require bootstrap.js
-//= require easing.js
-//= require modernizr-2.6.2.min.js
-//= require move-top.js
-//= require simpleLightbox.js
-//= require SmoothScroll.min.js
+
 //= require jquery.qrcode.min.js
 
 

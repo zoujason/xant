@@ -1,0 +1,54 @@
+<%#title:调查征集创建页%>
+<div class="wdzxy_bottom">
+  <div class="wzlb_content">
+    <div class="content_part_a">
+      <div class="content_part_a_link">
+        <a href="/www" target="_blank">网站首页</a>&nbsp;>&nbsp;<a ><%= @page.title %></a>
+      </div>
+    </div>
+    <% @polls.each_slice(5) do |polls| %>
+        <ul class="">
+          <% polls.each do |poll| %>
+              <li>
+                <p><a href="/polls/5a6a7ad4b3e9411ea4adff35?pid=<%= poll.id %>" target="_blank"><%= poll.title %></a></p>
+                <span>[<%= poll.created_at.strftime('%Y-%m-%d') %>]</span>
+              </li>
+          <% end %>
+        </ul>
+    <% end %>
+    <div class="list_content_bottom">
+      <div class="font_list_fenye">
+        <%= paginate @polls %>
+      </div>
+    </div>
+  </div>
+</div>
+<!--- T start --->
+<div class="part_t"></div>
+
+<!--- T end --->
+
+
+<script type="text/javascript">
+        $(function(){
+            var _this1=null;
+            $('.nav>li').hover(function(){
+                _this1=$(this);
+                _this1.find('.second-nav').show();
+                var _this2=null;
+                _this1.find('.second-nav').find('li').hover(function(){
+                    _this2=$(this);
+                    _this2.find('.third-nav').show();
+                    _this2.find('.third-nav').hover(function(){
+                        $(this).show();
+                    },function(){
+                        $(this).hide();
+                    });
+                },function(){
+                    _this2.find('.third-nav').hide();
+                });
+            },function(){
+                _this1.find('.second-nav').hide();
+            });
+        });
+</script>

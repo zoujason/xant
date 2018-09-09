@@ -17,7 +17,7 @@ class PagesController < ApplicationController
       cont_layout =  @page.cont_layout
       cont_tpl = @page.cont_tpl
 
-      if @page.site.mobile && mobile?
+      if @page.site.mobile? && mobile?
         cont_tpl, cont_layout = "m_#{cont_tpl}" , "m_#{cont_layout}"
       end
       render layout: cont_layout, template: cont_tpl
@@ -34,6 +34,7 @@ class PagesController < ApplicationController
   end
 
   def setup_view_paths
+    p "3333" <<  "app/sites/#{@page.site.theme || @page.site.slug}/views/"
     prepend_view_path "app/sites/#{@page.site.theme || @page.site.slug}/views/"
   end
 

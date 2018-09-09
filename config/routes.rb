@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     root to: 'pages#show'
   end
   resources :pages
+  resources :oauthwechats
 
 
 
