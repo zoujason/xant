@@ -4,8 +4,8 @@
   </div> -->
   <div class="swipers">
     <div class="con">
-      <h1>lamoda调查问卷</h1>
-      <p>感谢光临lamoda体验中心！</p>
+      <h1>zeta调查问卷</h1>
+      <p>感谢光临Zeta美甲美睫！</p>
       <p>3D时尚定制鞋开创者lamoda是国内领先的鞋类私人订制品牌，致力于为您设计、生产您想要的鞋、舒适的鞋。</p>
       <p>lamoda自推出“DIY自主设计”以来，受到了众多客户朋友的喜爱与追捧，为了让“DIY”能够更好地满足您对鞋子的所有向往，我们非常期待能知道您的想法。</p>
       <p>坐下来，品一杯咖啡，细细地想一想，您心中的lamodaDIY，是什么样的呢？</p>
@@ -31,7 +31,7 @@
                 <div class="f"><span><%= i + 1 %></span><%= q.title %></div>
                 <div class="choose">
                   <% q.answers.each_with_index do |item,j| %>
-                  <div class="input"><input type="radio" name="score" id="<%= j + 1 %>"/><label for="<%= j + 1 %>"><%= item.title %></label></div>
+                  <div class="input"><input  value="<%= item.id %>" type="radio" name="answers[<%= q.id%>]" id="<%= j + 1 %>"/><label for="<%= j + 1 %>"><%= item.title %></label></div>
                   <% end %>
                 </div>
               </div>
@@ -65,6 +65,18 @@
         <p>我们将赠送您100个lamoda商城积分，请填写您的商城账户手机号，谢谢!</p>
       </div>
     </div>
-    <a href="javascript:;" class="tijiao">提交调查</a>
+    <a  class="tijiao" onclick="sub()">提交调查</a>
   </div>
 </section>
+<script type="text/javascript">
+  function sub() {
+      document.forms[0].submit();
+  }
+
+  // $(function(){
+  //     $(".swiper-button-next").click(function(){
+  //         var vals = $(this).parent().prev().html();
+  //         alert(vals);
+  //     });
+  // });
+</script>

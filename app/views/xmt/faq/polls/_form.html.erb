@@ -83,7 +83,7 @@
                     <li class="question">
                       <input type="hidden" name="questions[][id]" value="<%= q.id %>">
                       <%= i + 1 %>:<input type="text" name="questions[][title]" value="<%= q.title %>">
-                      <!-- <input type="number" name="questions[][qty]" value="<%#= q.qty %>">-->
+                       <input type="number" name="questions[][qty]" value="<%= q.qty %>">
                       <% if q.sel_status == true %>
                           是否为多选：<select name="questions[][sel_status]" required><option value="">请选择</option><option value="false">否</option><option value="true" selected>是</option></select>
                       <% elsif q.sel_status == false %>

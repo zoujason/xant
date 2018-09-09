@@ -43,8 +43,12 @@
 .preNexts{width:100%;height:0.88rem;border:1px solid #cfd5da;border-radius:0.1rem;margin:0.3rem 0 0.55rem 0;position:relative;background:#e3e7e7;box-sizing:border-box;}
 .swiper-button-next,.swiper-button-prev{width:45%;height:0.88rem;float:left;line-height:0.88rem;font-size:0.29rem;color:#637d96;}
 .swiper-button-next{float:right;}
-.swiper-button-prev .pre,.swiper-button-next .next{width:0.96rem;height:0.86rem;float:left;background:url(../images/pre.png) center center no-repeat;background-size:0.55rem;display:block;border-right:1px solid #b8bdc1;margin-right:0.25rem;}
-.swiper-button-next .next{float:right;margin-left:0.25rem;background:url(../images/next.png) center center no-repeat;border-left:1px solid #b8bdc1;border-right:0;background-size:0.55rem;margin-right:0;}
+.swiper-button-prev .pre,.swiper-button-next .next{width:0.96rem;height:0.86rem;float:left;
+    /*background:url(../images/pre.png) center center no-repeat;*/
+    background-size:0.55rem;display:block;border-right:1px solid #b8bdc1;margin-right:0.25rem;}
+.swiper-button-next .next{float:right;margin-left:0.25rem;
+    /*background:url(../images/next.png) center center no-repeat;*/
+    border-left:1px solid #b8bdc1;border-right:0;background-size:0.55rem;margin-right:0;}
 
 
 
@@ -65,7 +69,9 @@
 
 .con.con1{background:#f8f9fa;}
 .con .phone{width:100%;height:0.63rem;border:1px solid #c5c8cc;border-radius:0.12rem;line-height:0.63rem;font-size:0.27rem;padding:0 0.2rem;background:#e4e6e9;box-sizing:border-box;margin-bottom:0.8rem;}
-.smile{width:100%;padding-top:1.78rem;background:url(../images/smile.png) right top no-repeat;background-size:2.19rem;}
+.smile{width:100%;padding-top:1.78rem;
+    /*background:url(../images/smile.png) right top no-repeat;*/
+    background-size:2.19rem;}
 
 
 

@@ -14,11 +14,8 @@ class PollsController < PagesController
     cont_layout =  @page.cont_layout
     cont_tpl = @page.cont_tpl
     if @page.site.mobile? && mobile?
-      p "1111"
       cont_tpl, cont_layout = "m_#{cont_tpl}" , "m_#{cont_layout}"
     end
-    p "3333:#{cont_layout}"
-    p "4444:#{cont_tpl}"
     render layout: cont_layout, template: cont_tpl
   end
 
@@ -26,7 +23,8 @@ class PollsController < PagesController
     unless params[:answers].blank?
       Xmt::Faq::Poll.save_answer(params[:answers])
     end
-    redirect_to poll_url(id: "5b852d94d9737f0d24aeb3a7", pid: params[:id]), notice: '问卷调查添加成功.'
+    # redirect_to poll_url(id: "5b94b319d9737f1bcc7c96a1", pid: params[:id]), notice: '问卷调查添加成功.'
+    redirect_to poll_url(id: "5b94b3ac20ed4e044b9bab4e", pid: params[:id]), notice: '问卷调查添加成功.'
   end
 
 end
