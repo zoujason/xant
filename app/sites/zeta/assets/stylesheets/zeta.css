@@ -13,8 +13,10 @@
  *
  * require_tree .
  *= require reset.css
- *= require swiper.min.css
  *= require toup.css
+ *= require swiper.min.css
+
+
 
 
  * require_self

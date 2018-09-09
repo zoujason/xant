@@ -12,8 +12,9 @@
 // about supported directives.
 //
 //= require jquery-1.11.3.js
-//= require swiper.min.js
 //= require fontSize.js
+//= require swiper.min.js
+
 
 
 //require_ *
