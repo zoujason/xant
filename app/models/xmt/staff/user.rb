@@ -57,7 +57,7 @@ module Xmt
       end
 
       def encrypt_password
-        self.password ||= 'xmt~123'
+        self.password ||= 'xant123'
         self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.username}--")
         self.password = encrypt(self.password)
       end
