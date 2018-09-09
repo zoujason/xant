@@ -34,7 +34,6 @@ class PagesController < ApplicationController
   end
 
   def setup_view_paths
-    p "3333" <<  "app/sites/#{@page.site.theme || @page.site.slug}/views/"
     prepend_view_path "app/sites/#{@page.site.theme || @page.site.slug}/views/"
   end
 

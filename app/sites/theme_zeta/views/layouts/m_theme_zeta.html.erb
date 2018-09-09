@@ -40,10 +40,10 @@
             <div class="agileinfo-social-grids">
               <h6 class="caption">网站分享</h6>
               <ul>
-                <li><a href="#"><span class="fa fa-weixin" onclick="weixin()"></span></a></li>
-                <li><a href="#" ><span class="fa fa-qq" onclick="qqzone()"></span></a></li>
-                <li><a href="#"><span class="fa fa-weibo" onclick="weibo()"></span></a></li>
-                <li class="weixin_code" style="display: none"></li>
+                <li><a href="#"><span class="fa fa-weixin"></span></a></li>
+                <li><a href="#" ><span class="fa fa-qq"></span></a></li>
+                <li><a href="#"><span class="fa fa-weibo"></span></a></li>
+                <!--<li><a href="#"><span class="fa fa-weibo"></span></a></li>-->
               </ul>
             </div>
 
@@ -99,20 +99,20 @@
 <%= yield %>
 
 <!--<div class="wthree-subscribef-w3ls">-->
-<!--<div class="container">-->
-<!--<h3 class="tittlef-agileits-w3layouts white-clrf">Zeta美甲美睫工作室地址</h3>-->
-<!--<p class="white-clrf"></p>-->
-<!--<div class="footer_w3layouts_gridf_right">-->
-<!--<%# hlp_list_article('5b8b941cd9737f131c55e196',{count:1}).each do |map|%>-->
-<!--<%#= map.attr(:cont,{html_safe: true})%>-->
-<!--<%# end %>-->
-<!--&lt;!&ndash;<form action="#" method="post">&ndash;&gt;-->
-<!--&lt;!&ndash;<input type="email" name="Email" placeholder="Email address..." required="">&ndash;&gt;-->
-<!--&lt;!&ndash;<input type="submit" value="Submit">&ndash;&gt;-->
-<!--&lt;!&ndash;<div class="clearfix"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;</form>&ndash;&gt;-->
-<!--</div>-->
-<!--</div>-->
+  <!--<div class="container">-->
+    <!--<h3 class="tittlef-agileits-w3layouts white-clrf">Zeta美甲美睫工作室地址</h3>-->
+    <!--<p class="white-clrf"></p>-->
+    <!--<div class="footer_w3layouts_gridf_right">-->
+        <!--<%# hlp_list_article('5b8b941cd9737f131c55e196',{count:1}).each do |map|%>-->
+          <!--<%#= map.attr(:cont,{html_safe: true})%>-->
+        <!--<%# end %>-->
+      <!--&lt;!&ndash;<form action="#" method="post">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="email" name="Email" placeholder="Email address..." required="">&ndash;&gt;-->
+        <!--&lt;!&ndash;<input type="submit" value="Submit">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="clearfix"></div>&ndash;&gt;-->
+      <!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
 <!--</div>-->
 <!--// Subscribe -->
 <!-- footer -->
@@ -224,65 +224,6 @@
     });
 </script>
 <!-- //FlexSlider-JavaScript -->
-<script type="text/javascript">
-    // 分享到微博
-    function weibo(){
-        var title = $("#page_title").text();
-        var shareUrl ='http://v.t.sina.com.cn/share/share.php?&appkey=895033136';    //真实的appkey，必选参数
-        shareUrl += '&url='+encodeURIComponent( window.document.location);    //参数url设置分享的内容链接|默认当前页location，可选参数
-        shareUrl += '&title=' +encodeURIComponent(title || document.title);   //参数title设置分享的标题|默认当前页标题，可选参数
-        shareUrl += '&content=' + 'utf-8';  //参数content设置页面编码gb2312|utf-8，可选参数
-        window.open(shareUrl,'_blank','toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0,'+ 'width=' + 1000 + ',height=' + 1000 + ',top=' +(screen.height-1000)/2 + ',left=' + (screen.width-1000)/2);
-    }
 
-    function qqzone(){
-        var title = $("#page_title").text();
-        var shareUrl ='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
-        shareUrl += 'url=' + encodeURIComponent(window.document.location);  //参数url设置分享的内容链接|默认当前页location
-        shareUrl += '&title=' +encodeURIComponent(title || document.title);   //参数title设置分享标题，可选参数
-        window.open(shareUrl,'_blank','width='+1000+',height='+1000+',top='+(screen.height-1000)/2+',left='+(screen.width-1000)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
-    }
-
-    function renren(){
-        var title = $("#page_title").text();
-        var shareUrl ='http://share.renren.com/share/buttonshare.do?';
-        shareUrl += 'link=' + encodeURIComponent(window.document.location);  //分享的链接
-        shareUrl += '&title=' +encodeURIComponent(title || document.title);    //分享的标题
-        window.open(shareUrl,'_blank','width='+1000+',height='+1000+',left='+(screen.width-1000)/2+',top='+(screen.height-1000)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
-    }
-
-    function tqq(){
-        var title = $("#page_title").text();
-        var shareUrl ='http://v.t.qq.com/share/share.php?';
-        shareUrl += 'title=' + encodeURIComponent(title||document.title);   //分享的标题
-        shareUrl += '&url=' + encodeURIComponent(window.document.location);   //分享的链接
-        shareUrl += '&appkey=5bd32d6f1dff4725ba40338b233ff155';   //在腾迅微博平台创建应用获取微博AppKey
-        window.open(shareUrl,'_blank','width='+1000+',height='+1000+',left='+(screen.width-1000)/2+',top='+(screen.height-1000)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
-    }
-
-    function sqq(){
-        var title = $("#page_title").text();
-        var shareUrl ='http://connect.qq.com/widget/shareqq/index.html?';
-        shareUrl += 'title=' + encodeURIComponent(title||document.title);   //分享的标题
-        shareUrl += '&url=' + encodeURIComponent(window.document.location);   //分享的链接
-        shareUrl += '&appkey=5bd32d6f1dff4725ba40338b233ff155';   //在腾迅微博平台创建应用获取微博AppKey
-        window.open(shareUrl,'_blank','width='+1000+',height='+1000+',left='+(screen.width-1000)/2+',top='+(screen.height-1000)/2+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
-    }
-    function weixin(){
-        var url = window.location.href;
-        $(".weixin_code").show();
-        var len = $(".weixin_code").find('canvas').length;
-        if(len > 0){
-            $(".weixin_code").find('canvas').remove()
-        }
-        $(".weixin_code").qrcode(url);
-    }
-
-    function weixin2() {
-        $(".weixin_code").hide();
-    }
-
-
-</script>
 </body>
 </html>
