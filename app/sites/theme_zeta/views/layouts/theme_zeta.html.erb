@@ -71,7 +71,7 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav ">
                 <li class="active"><a href="/www">首页</a></li>
-                <% hlp_list_channel('5b8bae0620ed4e05aa9eb318').each do |c|%>
+                <% hlp_list_channel('5b9a429d20ed4e08ea5349f6',{load_all:true}).each do |c|%>
                   <li><a href="<%= c.url%>" target="_blank"><%= c.attr(:title)%></a></li>
                 <% end %>
               </ul>

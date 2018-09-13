@@ -24,7 +24,7 @@ class PollsController < PagesController
       Xmt::Faq::Poll.save_answer(params[:answers])
     end
     # redirect_to poll_url(id: "5b94b319d9737f1bcc7c96a1", pid: params[:id]), notice: '问卷调查添加成功.'
-    redirect_to poll_url(id: "5b94e6eb20ed4e04d9c818cb", pid: params[:id]), notice: '问卷调查添加成功.'
+    redirect_to poll_url(id: "5b9a429d20ed4e08ea5349fd", pid: params[:id]), notice: '问卷调查添加成功.'
   end
 
 end
